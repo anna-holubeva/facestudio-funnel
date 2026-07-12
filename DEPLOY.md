@@ -5,8 +5,9 @@
 ## Что это
 - **Репозиторий:** `anna-holubeva/facestudio-funnel` (public)
 - **Хостинг:** GitHub Pages (ветка `main`, корень `/`), сеть Fastly — открывается и в РФ, и в Украине
-- **Домен:** `go.facestudio.online` (после настройки DNS, см. ниже)
-- **Превью до DNS:** https://anna-holubeva.github.io/facestudio-funnel/
+- **Домен:** `go.facestudio.online` — ✅ подключён (SSL, Enforce HTTPS, проверен РФ+Украина)
+- **Живые страницы:** https://go.facestudio.online/diagnostika/ · https://go.facestudio.online/rezultaty/
+- github.io-адреса теперь 301-редиректят на домен — это нормально
 - **Локальный клон:** `D:\Обучение\Boost\Работа с FS\facestudio-funnel\`
 - **Токен:** `GITHUB_TOKEN_FACESTUDIO` в `D:\Обучение\Boost\Работа с FS\EN\secrets.local.env` (scope repo). В репозиторий НЕ коммитить — он публичный.
 
@@ -14,8 +15,9 @@
 ```
 /                     index.html   — заглушка-корень
 /diagnostika/         index.html   — лендинг видео-диагностики (вход воронки)
+/rezultaty/           index.html   — страница результатов диагностики (разбор + план + подарок)
 .nojekyll                          — отключает Jekyll (статика как есть)
-CNAME                              — добавить ПОСЛЕ настройки DNS (см. ниже)
+CNAME                              — go.facestudio.online (домен подключён)
 ```
 
 ## Как обновить страницу (деплой = git push)
@@ -33,7 +35,10 @@ git -C "$REPO" push "https://x-access-token:$TOKEN@github.com/anna-holubeva/face
 
 > Лендинги — самодостаточные HTML (шрифты/картинки/CSS/JS вшиты base64). Просто заменить файл — этого достаточно.
 
-## Подключение домена go.facestudio.online (одноразово)
+## Подключение домена go.facestudio.online (одноразово) — ✅ УЖЕ СДЕЛАНО 12.07.2026
+> Домен подключён и работает. Раздел ниже — на случай пересоздания/отладки.
+> Нюанс: custom domain задан через Pages API (`PUT /repos/.../pages {"cname":"go.facestudio.online"}`) — файл `CNAME` сам не всегда подхватывается.
+
 DNS-зоной `facestudio.online` управляет **Cloudflare** (не reg.ru). Записи добавляет чат, ведущий DNS.
 1. **Cloudflare → DNS →** добавить запись:
    - Type: `CNAME` · Name: `go` · Target: `anna-holubeva.github.io` · Proxy: **DNS only (серая тучка)** · TTL: Auto
