@@ -1,0 +1,14 @@
+# никаких секретов в публичном репозитории
+*.env
+*.env.*
+secrets*
+*.key
+*.pem
+# системный мусор
+.DS_Store
+Thumbs.db
+desktop.ini
+# рабочие/временные
+*.tmp
+scratch/
+_src/
