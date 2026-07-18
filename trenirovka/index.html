@@ -337,34 +337,32 @@ footer .brand{display:block;margin-bottom:.4rem}
     }).catch(function(){});
   }catch(e){}
 
-  // ПЛЕЙСХОЛДЕРЫ — заменятся при сборке Salebot (те же, что на лендинге/video1)
-  var BOT_NAME = 'facestudio_club_bot';   // боевой TG-бот
-  var VK_GROUP = '202385574';             // боевой VK-чат (метку не шлём — VK её не пробрасывает)
+  // Кнопка просто открывает чат клиента — без меток и триггеров
+  // (оффер уходит сам: page-open выше). Канал бот подставляет в ?ct= (1=TG, 0=VK).
+  var CHAT_LINKS = {
+    tg: 'https://t.me/facestudio_club_bot',
+    vk: 'https://vk.com/im?sel=-202385574'
+  };
   var ACCESS_HOURS = 72;
 
   var params = new URLSearchParams(location.search);
-  var plat = params.get('p'); // 'tg' | 'vk' | null
+  var ct = params.get('ct');   // '1' = Telegram, '0' = VK
+  var p  = params.get('p');    // legacy-фолбэк 'tg' | 'vk'
+  var plat = ct === '1' ? 'tg' : ct === '0' ? 'vk' : (p === 'tg' || p === 'vk' ? p : null);
 
-  // --- ссылка в бота ---
-  function botLink(p, tag){
-    // VK: просто открываем боевой чат (метку не пробросить). TG: метку start сохраняем.
-    return p === 'vk'
-      ? 'https://vk.com/im?sel=-' + VK_GROUP
-      : 'https://t.me/' + BOT_NAME + '?start=' + tag;
-  }
-  // wire: одна кнопка при ?p, иначе две (фолбэк)
-  function wireCta(singleId, bothId, singleBtnId, tagBase){
+  // wire: одна кнопка при известном канале, иначе две (фолбэк)
+  function wireCta(singleId, bothId, singleBtnId){
     var single = document.getElementById(singleId), both = document.getElementById(bothId);
-    if(plat === 'tg' || plat === 'vk'){
+    if(plat){
       single.hidden = false;
       document.getElementById(singleBtnId).addEventListener('click', function(){
-        location.href = botLink(plat, tagBase + '_' + plat);
+        location.href = CHAT_LINKS[plat];
       });
     } else {
       both.hidden = false;
       both.querySelectorAll('.btn').forEach(function(b){
         var bp = b.getAttribute('data-plat');
-        b.addEventListener('click', function(){ location.href = botLink(bp, tagBase + '_' + bp); });
+        b.addEventListener('click', function(){ location.href = CHAT_LINKS[bp]; });
       });
     }
   }
@@ -393,7 +391,7 @@ footer .brand{display:block;margin-bottom:.4rem}
   function showClosed(){
     viewOpen.hidden = true;
     viewClosed.hidden = false;
-    wireCta('closedSingle', 'closedBoth', 'closedBtn', 'train7c');
+    wireCta('closedSingle', 'closedBoth', 'closedBtn');
   }
   function showOpen(){
     viewClosed.hidden = true;
@@ -401,7 +399,7 @@ footer .brand{display:block;margin-bottom:.4rem}
     // грузим плеер только когда открыто
     var pl = document.getElementById('player');
     if(pl && !pl.src) pl.src = pl.getAttribute('data-src');
-    wireCta('openSingle', 'openBoth', 'openBtn', 'train7');
+    wireCta('openSingle', 'openBoth', 'openBtn');
     startCountdown();
   }
 
