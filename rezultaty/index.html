@@ -445,6 +445,17 @@ section{padding-block:clamp(48px,8vw,96px)}
   box-shadow:var(--shadow-card);font-size:.92rem;color:var(--ink-soft);
 }
 .gift-note .chip-emoji{font-size:1.2em;flex:0 0 auto}
+.gift-cta{margin-top:1.6rem}
+.btn-row{display:flex;flex-wrap:wrap;gap:14px}
+.btn{flex:1 1 240px;max-width:380px;display:inline-flex;align-items:center;justify-content:center;gap:.55em;
+  font-family:'Golos Text',sans-serif;font-weight:800;font-size:1.02rem;letter-spacing:.05em;text-transform:uppercase;text-decoration:none;
+  color:var(--gold-ink);background:linear-gradient(180deg,var(--gold-300),var(--gold-500));border:0;border-radius:16px;padding:1.1em 1.4em;cursor:pointer;
+  box-shadow:0 14px 28px -10px rgba(242,178,62,.55),inset 0 1.5px 0 rgba(255,255,255,.65);transition:transform .25s cubic-bezier(.22,1,.36,1),box-shadow .25s;touch-action:manipulation}
+.btn:hover{transform:translateY(-3px);box-shadow:0 20px 34px -10px rgba(242,178,62,.6),inset 0 1.5px 0 rgba(255,255,255,.65)}
+.btn:active{transform:translateY(-1px)}
+.btn:focus-visible{outline:3px solid var(--blue-500);outline-offset:3px}
+.btn svg{flex:0 0 20px}
+[hidden]{display:none!important}
 .gift-portrait{position:relative;max-width:320px;margin-inline:auto;width:100%}
 .gift-portrait .portrait-frame::before{padding-top:118%}
 .sign{margin-top:1.4rem;font-family:'Marck Script',cursive;font-size:1.8rem;color:var(--blue-800);line-height:1.1}
@@ -788,6 +799,15 @@ footer .brand{display:block;margin-bottom:.4rem}
           <span class="chip-emoji">📩</span>
           <div><b>Где найти тренировку?</b> Ссылка придёт вам в этот же чат — следите за сообщениями.</div>
         </div>
+        <div class="gift-cta cta-zone">
+          <div class="btn-row row-single" hidden>
+            <button type="button" class="btn">Смотреть тренировку</button>
+          </div>
+          <div class="btn-row row-both" hidden>
+            <button type="button" class="btn" data-plat="tg"><svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M21.9 4.1c.3-1.2-.9-2.2-2-1.7L2.7 9.2c-1.2.5-1.1 2.2.1 2.6l4.7 1.5 1.8 5.6c.4 1.1 1.8 1.4 2.6.5l2.4-2.6 4.7 3.5c1 .7 2.4.2 2.7-1l4.2-15.2zM8.9 12.9l8.5-5.4c.4-.3.8.3.5.6l-6.9 6.4-.3 3.1-1.8-4.7z"/></svg> Смотреть в Telegram</button>
+            <button type="button" class="btn" data-plat="vk"><svg aria-hidden="true" viewBox="0 1.7 24 24" width="20" height="20" fill="currentColor"><path d="M12.7 19.5h1.4s.4 0 .6-.3c.2-.2.2-.6.2-.6s0-1.9.9-2.2c.8-.3 1.9 1.8 3.1 2.6.9.6 1.5.5 1.5.5l3.1-.1s1.6-.1.9-1.4c-.1-.1-.5-.9-2.3-2.6-1.9-1.8-1.7-1.5.6-4.5 1.4-1.9 2-3 1.8-3.5s-1.3-.4-1.3-.4h-3.5s-.3 0-.5.1c-.2.2-.3.5-.3.5s-.6 1.5-1.3 2.7c-1.6 2.6-2.2 2.7-2.4 2.6-.6-.3-.4-1.5-.4-2.3 0-2.5.4-3.5-.7-3.8-.4-.1-.6-.2-1.6-.2-1.2 0-2.3 0-2.9.3-.4.2-.7.6-.5.7.2 0 .7.1 1 .5.3.5.3 1.6.3 1.6s.2 3-.5 3.4c-.5.3-1.1-.3-2.5-2.7-.7-1.2-1.3-2.5-1.3-2.5s-.1-.3-.3-.4c-.2-.2-.5-.2-.5-.2H3.2s-.5 0-.7.2c-.2.2 0 .6 0 .6s2.6 5.9 5.5 8.9c2.7 2.7 5.7 2.5 5.7 2.5z"/></svg> Смотреть во ВКонтакте</button>
+          </div>
+        </div>
       </div>
       <div>
         <div class="gift-portrait">
@@ -815,6 +835,29 @@ footer .brand{display:block;margin-bottom:.4rem}
       body: JSON.stringify({ cid: cid, step: 'rezultaty' })
     }).catch(function(){});
   }catch(e){}
+
+  // кнопка «Смотреть тренировку» — просто открывает чат клиента, без меток и триггеров
+  // (тренировку бот прислал сам при page-open). Канал в ?ct= (1=TG, 0=VK), как на /trenirovka/.
+  var CHAT_LINKS = {
+    tg: 'https://t.me/facestudio_club_bot',
+    vk: 'https://vk.com/im?sel=-202385574'
+  };
+  var qp = new URLSearchParams(location.search);
+  var ct = qp.get('ct');   // '1' = Telegram, '0' = VK
+  var p  = qp.get('p');    // legacy-фолбэк 'tg' | 'vk'
+  var plat = ct === '1' ? 'tg' : ct === '0' ? 'vk' : (p === 'tg' || p === 'vk' ? p : null);
+  document.querySelectorAll('.cta-zone').forEach(function(zone){
+    var single = zone.querySelector('.row-single'), both = zone.querySelector('.row-both');
+    if(plat){
+      single.hidden = false;
+      single.querySelector('.btn').addEventListener('click', function(){ location.href = CHAT_LINKS[plat]; });
+    } else {
+      both.hidden = false;
+      both.querySelectorAll('.btn').forEach(function(b){
+        b.addEventListener('click', function(){ location.href = CHAT_LINKS[b.getAttribute('data-plat')]; });
+      });
+    }
+  });
 
   var els=[].slice.call(document.querySelectorAll('.reveal'));
   if(!('IntersectionObserver'in window)||matchMedia('(prefers-reduced-motion:reduce)').matches){
