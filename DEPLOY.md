@@ -15,6 +15,7 @@
 ```
 /                     index.html   — заглушка-корень
 /diagnostika/         index.html   — лендинг видео-диагностики (вход воронки)
+/video1/              index.html   — страница видео-диагностики (шаг 3: плеер + опрос)
 /rezultaty/           index.html   — страница результатов диагностики (разбор + план + подарок)
 .nojekyll                          — отключает Jekyll (статика как есть)
 CNAME                              — go.facestudio.online (домен подключён)
