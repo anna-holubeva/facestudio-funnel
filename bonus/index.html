@@ -457,33 +457,29 @@ footer .brand{display:block;margin-bottom:.4rem}
 <script>
 (function(){
   'use strict';
-  // ПЛЕЙСХОЛДЕРЫ — заменятся при сборке Salebot (те же, что на /trenirovka/, /video1/)
-  var BOT_NAME = 'facestudio_club_bot';   // боевой TG-бот
-  var VK_GROUP = '202385574';             // боевой VK-чат (метку не шлём — VK её не пробрасывает)
+  // БОЕВЫЕ ССЫЛКИ (выданы Аней 19.07): tg — Salebot-бот со start-меткой, vk — Salebot-приложение
+  var LINKS = {
+    tg: 'https://telegram.me/facestudio_club_bot?start=id668759522',
+    vk: 'https://vk.ru/app7062840#1eb8dcc24314fdc56f49fcfde2d59b51&force=1'
+  };
   var BONUS_HOURS = 24;                   // дедлайн бонусов; согласовать с 72ч доступа тренировки
 
   var params = new URLSearchParams(location.search);
   var plat = params.get('p'); // 'tg' | 'vk' | null
 
-  // --- ссылка в бота: выбор тарифа и оплата (start=pay_tg / pay_vk) ---
-  function botLink(p, tag){
-    return p === 'vk'
-      ? 'https://vk.com/im?sel=-' + VK_GROUP
-      : 'https://t.me/' + BOT_NAME + '?start=' + tag;
-  }
   // одна кнопка при ?p, иначе две (фолбэк)
   document.querySelectorAll('.cta-zone').forEach(function(zone){
     var single = zone.querySelector('.row-single'), both = zone.querySelector('.row-both');
     if(plat === 'tg' || plat === 'vk'){
       single.hidden = false;
       single.querySelector('.btn').addEventListener('click', function(){
-        location.href = botLink(plat, 'pay_' + plat);
+        location.href = LINKS[plat];
       });
     } else {
       both.hidden = false;
       both.querySelectorAll('.btn').forEach(function(b){
         var bp = b.getAttribute('data-plat');
-        b.addEventListener('click', function(){ location.href = botLink(bp, 'pay_' + bp); });
+        b.addEventListener('click', function(){ location.href = LINKS[bp]; });
       });
     }
   });
