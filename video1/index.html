@@ -400,7 +400,9 @@ footer .brand{display:block;margin-bottom:.4rem}
   }
   function go(plat){
     if(plat === 'vk'){ sendVk(); window.location.href = 'https://vk.com/im?sel=-' + VK_GROUP; }
-    else { window.location.href = 'https://t.me/' + BOT_NAME + '?start=' + payload(); }
+    // MVP без сегментации: бот запускает выдачу по /start results (проверено вживую 18.07).
+    // Когда добавим сегментацию — вернуть '?start=' + payload() и роутер в боте.
+    else { window.location.href = 'https://t.me/' + BOT_NAME + '?start=results'; }
   }
   function bothAnswered(){ return state.q1 !== '0' && state.q2 !== '0'; }
   function pulse(el){ el.classList.remove('pulse'); void el.offsetWidth; el.classList.add('pulse'); }
