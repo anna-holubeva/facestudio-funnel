@@ -327,6 +327,16 @@ footer .brand{display:block;margin-bottom:.4rem}
 <script>
 (function(){
   'use strict';
+  // пинг приёмника при открытии страницы (fire-and-forget, как POST на /rezultaty/)
+  try{
+    var cid = new URLSearchParams(location.search).get('cid') || '';
+    fetch('https://club.facestudio.by/anketa/page-open', {
+      method:'POST', mode:'cors', keepalive:true,
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ cid: cid, step: 'trenirovka' })
+    }).catch(function(){});
+  }catch(e){}
+
   // ПЛЕЙСХОЛДЕРЫ — заменятся при сборке Salebot (те же, что на лендинге/video1)
   var BOT_NAME = 'facestudio_club_bot';   // боевой TG-бот
   var VK_GROUP = '202385574';             // боевой VK-чат (метку не шлём — VK её не пробрасывает)
