@@ -6,7 +6,7 @@
 - **Репозиторий:** `anna-holubeva/facestudio-funnel` (public)
 - **Хостинг:** GitHub Pages (ветка `main`, корень `/`), сеть Fastly — открывается и в РФ, и в Украине
 - **Домен:** `go.facestudio.online` — ✅ подключён (SSL, Enforce HTTPS, проверен РФ+Украина)
-- **Живые страницы:** https://go.facestudio.online/diagnostika/ · https://go.facestudio.online/rezultaty/
+- **Живые страницы:** https://go.facestudio.online/diagnostika/ · /video1/ · /rezultaty/ · /trenirovka/ · /oferta/ · /rules/
 - github.io-адреса теперь 301-редиректят на домен — это нормально
 - **Локальный клон:** `D:\Обучение\Boost\Работа с FS\facestudio-funnel\`
 - **Токен:** `GITHUB_TOKEN_FACESTUDIO` в `D:\Обучение\Boost\Работа с FS\EN\secrets.local.env` (scope repo). В репозиторий НЕ коммитить — он публичный.
@@ -18,6 +18,7 @@
 /video1/              index.html   — страница видео-диагностики (шаг 3: плеер + опрос)
 /rezultaty/           index.html   — страница результатов диагностики (разбор + план + подарок)
 /trenirovka/          index.html   — бесплатная тренировка (шаг 7: плеер + 72ч-доступ, 2 состояния)
+/oferta/              index.html   — оффер (шаг 8: вступление в Клуб — тарифы, бонусы 24ч, кнопки в бота)
 /rules/               index.html   — противопоказания к тренировкам (перенос с facestudio.by, открывается в Украине)
 .nojekyll                          — отключает Jekyll (статика как есть)
 CNAME                              — go.facestudio.online (домен подключён)
