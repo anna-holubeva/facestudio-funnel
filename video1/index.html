@@ -6,9 +6,7 @@
 <title>Видео-диагностика · Face Studio</title>
 <meta name="description" content="Пройдите видео-диагностику лица: 6 тестов за 15 минут. Ответьте на 2 вопроса и получите персональный разбор результатов.">
 <meta name="robots" content="noindex,follow">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Видео-диагностика · Face Studio">
-<meta property="og:description" content="Пройдите видео-диагностику лица: 6 тестов за 15 минут. Ответьте на 2 вопроса и получите персональный разбор результатов.">
+<meta property="og:type" content="website"><meta property="og:title" content="Видео-диагностика · Face Studio"><meta property="og:description" content="Пройдите видео-диагностику лица: 6 тестов за 15 минут. Ответьте на 2 вопроса и получите персональный разбор результатов.">
 <style>:root{color-scheme:light}body{margin:0;padding:0;background:#f9fcfe;color:#22333f}img{max-width:100%}</style>
 </head>
 <body>
@@ -365,8 +363,10 @@ footer .brand{display:block;margin-bottom:.4rem}
 (function(){
   'use strict';
   // ПЛЕЙСХОЛДЕРЫ — заменятся при сборке Salebot (те же, что на лендинге)
-  var BOT_NAME = 'BOT_NAME';
-  var GROUP_ID = 'GROUP_ID';
+  var BOT_NAME = 'facestudio_club_bot';                        // боевой TG-бот
+  var VK_GROUP = '202385574';                                 // боевое VK-сообщество
+  var RECEIVER = 'https://club.facestudio.by/anketa/funnel';  // VK-приёмник ответов (по cid)
+  var cid = new URLSearchParams(location.search).get('cid') || '';
 
   var state = { q1:'0', q2:'0' };
   var nudged = false;
@@ -387,11 +387,20 @@ footer .brand{display:block;margin-bottom:.4rem}
   });
 
   function payload(){ return 'd-' + (state.q1 || '0') + '-' + (state.q2 || '0'); }
-  function deepLink(plat){
-    var pl = payload();
-    return plat === 'vk'
-      ? 'https://vk.com/im?sel=-' + GROUP_ID + '&ref=' + pl
-      : 'https://t.me/' + BOT_NAME + '?start=' + pl;
+  // VK не пробрасывает ref → ответы шлём на сервер по cid (fire-and-forget, keepalive),
+  // затем сразу открываем VK-чат, не дожидаясь ответа приёмника.
+  function sendVk(){
+    try{
+      fetch(RECEIVER, {
+        method:'POST', mode:'cors', keepalive:true,
+        headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({ cid: cid, q1: state.q1 || '0', q2: state.q2 || '0' })
+      }).catch(function(){});
+    }catch(e){}
+  }
+  function go(plat){
+    if(plat === 'vk'){ sendVk(); window.location.href = 'https://vk.com/im?sel=-' + VK_GROUP; }
+    else { window.location.href = 'https://t.me/' + BOT_NAME + '?start=' + payload(); }
   }
   function bothAnswered(){ return state.q1 !== '0' && state.q2 !== '0'; }
   function pulse(el){ el.classList.remove('pulse'); void el.offsetWidth; el.classList.add('pulse'); }
@@ -404,7 +413,7 @@ footer .brand{display:block;margin-bottom:.4rem}
   function attempt(plat){
     // не блокируем без ответов: 1-й клик — мягко подсветить, 2-й — пропустить
     if(!bothAnswered() && !nudged){ nudged = true; nudge(); return; }
-    window.location.href = deepLink(plat);
+    go(plat);
   }
 
   // платформа из ?p=tg|vk → одна кнопка; иначе — две (фолбэк как на лендинге)

@@ -328,8 +328,8 @@ footer .brand{display:block;margin-bottom:.4rem}
 (function(){
   'use strict';
   // ПЛЕЙСХОЛДЕРЫ — заменятся при сборке Salebot (те же, что на лендинге/video1)
-  var BOT_NAME = 'BOT_NAME';
-  var GROUP_ID = 'GROUP_ID';
+  var BOT_NAME = 'facestudio_club_bot';   // боевой TG-бот
+  var VK_GROUP = '202385574';             // боевой VK-чат (метку не шлём — VK её не пробрасывает)
   var ACCESS_HOURS = 72;
 
   var params = new URLSearchParams(location.search);
@@ -337,8 +337,9 @@ footer .brand{display:block;margin-bottom:.4rem}
 
   // --- ссылка в бота ---
   function botLink(p, tag){
+    // VK: просто открываем боевой чат (метку не пробросить). TG: метку start сохраняем.
     return p === 'vk'
-      ? 'https://vk.com/im?sel=-' + GROUP_ID + '&ref=' + tag
+      ? 'https://vk.com/im?sel=-' + VK_GROUP
       : 'https://t.me/' + BOT_NAME + '?start=' + tag;
   }
   // wire: одна кнопка при ?p, иначе две (фолбэк)
