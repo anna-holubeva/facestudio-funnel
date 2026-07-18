@@ -806,6 +806,16 @@ footer .brand{display:block;margin-bottom:.4rem}
 
 <script>
 (function(){
+  // пинг приёмника при открытии страницы (fire-and-forget, как POST на /video1/)
+  try{
+    var cid = new URLSearchParams(location.search).get('cid') || '';
+    fetch('https://club.facestudio.by/anketa/page-open', {
+      method:'POST', mode:'cors', keepalive:true,
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ cid: cid, step: 'rezultaty' })
+    }).catch(function(){});
+  }catch(e){}
+
   var els=[].slice.call(document.querySelectorAll('.reveal'));
   if(!('IntersectionObserver'in window)||matchMedia('(prefers-reduced-motion:reduce)').matches){
     els.forEach(function(e){e.classList.add('in')});return;
