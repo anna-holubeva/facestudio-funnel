@@ -533,5 +533,19 @@ footer .brand{display:block;margin-bottom:.4rem}
 })();
 </script>
 
+<!-- Посещаемость (без cookie, без IP): просмотр + клики по кнопкам -> club.facestudio.by/anketa/pv. Статистика: сверка базы/funnel_stats.py -->
+<script>
+(function(){var U='https://club.facestudio.by/anketa/pv',q=new URLSearchParams(location.search);
+function send(ev,t){try{var d=JSON.stringify({ev:ev,t:t||'',h:location.hostname,p:location.pathname,r:document.referrer,
+us:q.get('utm_source')||'',um:q.get('utm_medium')||'',uc:q.get('utm_campaign')||'',cid:q.get('cid')||'',
+src:q.get('p')||q.get('ct')||'',w:screen.width});
+if(!(navigator.sendBeacon&&navigator.sendBeacon(U,new Blob([d],{type:'text/plain'}))))
+fetch(U,{method:'POST',body:d,keepalive:true,mode:'no-cors'})}catch(e){}}
+send('view');
+document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('.btn,[data-cta]');if(!b)return;
+var all=[].slice.call(document.querySelectorAll('.btn,[data-cta]'));
+send('click',(b.getAttribute('data-cta')||b.getAttribute('data-link')||b.getAttribute('data-plat')||b.id||'btn')+'@'+(all.indexOf(b)+1))},true);
+})();
+</script>
 </body>
 </html>
