@@ -210,8 +210,7 @@ h1 .nw{white-space:nowrap}
 h2{font-size:clamp(1.7rem,2.6vw + .9rem,2.6rem)}
 .accent{
   display:block;
-  background:linear-gradient(100deg,var(--coral-1) 0%,#f47a86 55%,var(--coral-2) 100%);
-  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:var(--coral-1);
+  color:#e8566b;
 }
 .lead{color:var(--ink-2);font-size:clamp(1.05rem,.4vw + .96rem,1.2rem);line-height:1.55}
 b,strong{font-weight:600;color:var(--ink)}
@@ -222,9 +221,8 @@ b,strong{font-weight:600;color:var(--ink)}
   font-family:var(--f-display);font-weight:700;text-transform:uppercase;letter-spacing:.02em;
   font-size:clamp(1.25rem,1.6vw + .9rem,1.9rem);line-height:1.15;color:#fff;
   padding:.55em 1em;border-radius:16px;
-  background:linear-gradient(180deg,var(--blue-1),var(--blue-2));
-  box-shadow:0 0 0 2px rgba(255,255,255,.55) inset,0 0 26px 2px var(--blue-glow),0 14px 30px -14px rgba(20,90,170,.8);
-  text-shadow:0 1px 8px rgba(10,60,130,.35);
+  background:#2a86dc;
+  box-shadow:0 10px 22px -14px rgba(20,80,150,.7);
 }
 .date i{font-style:normal;opacity:.75}
 
@@ -235,28 +233,36 @@ b,strong{font-weight:600;color:var(--ink)}
 @media(max-width:560px){.topbar span{display:none}}
 
 /* ---------- экран 1 ---------- */
-.hero{padding-block:clamp(20px,3.5vw,40px) clamp(40px,6vw,72px)}
-.hero-grid{display:grid;grid-template-columns:1.12fr .88fr;grid-template-areas:"head photo" "body photo";column-gap:clamp(20px,3vw,48px);align-items:start}
-.h-head{grid-area:head}
-.h-body{grid-area:body}
-.h-photo{grid-area:photo;align-self:start;margin-top:clamp(0px,3vw,40px)}
+/* Фото — главный герой экрана: Татьяна до бёдер, крупно. За ней плотный румяный круг
+   (эхо кораллового круга с афиши), без свечений. Круг, лотос и подпись привязаны к .fig. */
+.hero{position:relative;padding-block:clamp(20px,3.5vw,40px) clamp(40px,6vw,72px)}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;grid-template-areas:"head photo" "body photo";column-gap:clamp(16px,2.5vw,40px);align-items:start}
+.h-head{grid-area:head;position:relative;z-index:2}
+.h-body{grid-area:body;position:relative;z-index:2}
+.h-photo{grid-area:photo;display:flex;justify-content:center;padding-top:clamp(0px,1.5vw,16px)}
 .hero .date{margin-top:1.3rem}
 .hero .lead{margin-top:1.2rem;max-width:32rem}
+
+.fig{position:relative;width:min(100%,430px)}
+.fig::before{content:"";position:absolute;left:50%;top:30%;width:112%;aspect-ratio:1;transform:translateX(-50%);border-radius:50%;background:#f9d3cf;z-index:0}
+.fig .tati{position:relative;z-index:1;width:100%;height:auto;
+  -webkit-mask-image:linear-gradient(180deg,#000 86%,transparent 100%);mask-image:linear-gradient(180deg,#000 86%,transparent 100%)}
+.fig .lotus{position:absolute;z-index:2;width:44%;right:-14%;bottom:2%;filter:drop-shadow(0 10px 16px rgba(180,80,100,.18))}
+.fig .name{position:absolute;z-index:3;left:-6%;bottom:12%;background:#fff;border-radius:999px;padding:.5rem 1.1rem;
+  font-size:.92rem;font-weight:600;color:var(--ink);box-shadow:var(--shadow-row);line-height:1.3}
+.fig .name small{display:block;font-weight:400;color:var(--ink-soft);font-size:.8rem}
+
 @media(max-width:880px){
   .hero-grid{grid-template-columns:1fr;grid-template-areas:"head" "photo" "body"}
   .hero .date{display:flex}
+  .h-photo{margin-top:.8rem;padding-top:0}
+  .fig{width:min(88%,380px);height:clamp(400px,118vw,540px);overflow:visible}
+  .fig .tati{height:100%;width:auto;margin-inline:auto;object-fit:cover;object-position:top;
+    -webkit-mask-image:linear-gradient(180deg,#000 84%,transparent 100%);mask-image:linear-gradient(180deg,#000 84%,transparent 100%)}
+  .fig::before{top:22%;width:104%}
+  .fig .lotus{width:34%;right:-8%}
+  .fig .name{left:-4%}
 }
-
-.photo{position:relative;max-width:460px;margin-inline:auto}
-.photo::before{content:"";position:absolute;inset:8% 4% 10% 4%;border-radius:50%;
-  background:radial-gradient(circle,rgba(255,255,255,.95),rgba(255,230,232,.5) 55%,transparent 72%);filter:blur(8px);z-index:0}
-.photo .tati{position:relative;z-index:1;width:100%;height:auto;
-  -webkit-mask-image:linear-gradient(180deg,#000 72%,transparent 99%);mask-image:linear-gradient(180deg,#000 72%,transparent 99%)}
-.photo .lotus{position:absolute;z-index:2;width:44%;right:-9%;bottom:4%;filter:drop-shadow(0 10px 18px rgba(200,90,110,.25))}
-.photo .lotus.l2{width:26%;left:-6%;right:auto;bottom:20%;transform:rotate(-14deg);opacity:.9}
-.photo .name{position:absolute;z-index:3;left:0;bottom:6%;background:rgba(255,255,255,.92);backdrop-filter:blur(6px);
-  border-radius:999px;padding:.45rem 1rem;font-size:.9rem;font-weight:600;color:var(--ink);box-shadow:var(--shadow-row)}
-@media(max-width:880px){.photo{max-width:360px;margin-top:.4rem}.photo .lotus.l2{display:none}}
 
 /* ---------- блок записи ---------- */
 .cta{background:rgba(255,255,255,.9);border:1px solid var(--line);border-radius:var(--radius-lg);
@@ -267,10 +273,11 @@ b,strong{font-weight:600;color:var(--ink)}
 @media(max-width:640px){.btns{grid-template-columns:1fr}}
 .btn{display:flex;align-items:center;justify-content:center;gap:.6rem;min-height:64px;padding:.9rem 1.1rem;
   border-radius:var(--radius-sm);font-family:var(--f-body);font-weight:700;font-size:1.08rem;color:#fff;text-decoration:none;text-align:center;
-  background:linear-gradient(180deg,var(--blue-1),var(--blue-2));
-  box-shadow:0 0 0 2px rgba(255,255,255,.5) inset,0 0 20px var(--blue-glow),0 14px 26px -14px rgba(20,90,170,.85);
-  text-shadow:0 1px 6px rgba(10,60,130,.3);transition:transform .16s ease,box-shadow .16s ease}
-.btn.vk{background:linear-gradient(180deg,#6f9bff,#3d63e0);box-shadow:0 0 0 2px rgba(255,255,255,.5) inset,0 0 20px rgba(80,120,255,.5),0 14px 26px -14px rgba(40,60,190,.85)}
+  background:#1d8ecb;box-shadow:0 8px 18px -12px rgba(20,60,110,.6);
+  transition:transform .16s ease,background-color .16s ease}
+.btn:hover{background:#1780b8}
+.btn.vk{background:#2f62e0}
+.btn.vk:hover{background:#2653c7}
 .btn svg{width:26px;height:26px;flex:none}
 .btn:hover{transform:translateY(-2px)}
 .btn-note{margin-top:.7rem;font-size:.9rem;line-height:1.45;color:var(--ink-soft);display:flex;gap:.45rem;align-items:flex-start}
@@ -330,11 +337,10 @@ footer a{color:var(--coral-ink)}
     </div>
 
     <div class="h-photo">
-      <div class="photo">
-        <img class="tati" src="tatiana-efir.webp" alt="Татьяна Дембовская" width="830" height="1107">
-        <img class="lotus l2" src="lotus.webp" alt="" aria-hidden="true" width="513" height="441">
+      <div class="fig">
+        <img class="tati" src="tatiana-full.webp" alt="Татьяна Дембовская" width="730" height="1340">
         <img class="lotus" src="lotus.webp" alt="" aria-hidden="true" width="513" height="441">
-        <div class="name">Татьяна Дембовская</div>
+        <div class="name">Татьяна Дембовская<small>автор Face Studio, 57 лет</small></div>
       </div>
     </div>
 
