@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>4 дня в клубе Face Studio — бесплатно</title>
+<title>4 дня с Татьяной Дембовской — бесплатно</title>
 <meta name="description" content="14–17 октября — 4 дня в закрытом клубе Татьяны Дембовской бесплатно. Каждое утро — тренировка из клуба, 17 октября — большой прямой эфир.">
 <meta name="robots" content="index,follow">
 <meta property="og:type" content="website">
-<meta property="og:title" content="4 дня в клубе Face Studio — бесплатно">
+<meta property="og:title" content="4 дня с Татьяной Дембовской — бесплатно">
 <meta property="og:description" content="14–17 октября. Каждое утро — тренировка из моего клуба.">
 <meta property="og:image" content="https://go.facestudio.online/klub4/assets/tatiana-hero.webp">
 <style>
@@ -242,6 +242,8 @@ section{padding-block:clamp(40px,5.5vw,72px)}
 @media(max-width:560px){.topbar span{display:none}}
 
 /* ---------- экран 1 · анонс и запись ---------- */
+/* размытые пятна шапки вылезали за правый край — на телефоне страницу можно было утащить вбок */
+html,body{overflow-x:hidden}
 .hero{padding-block:clamp(22px,4vw,44px) clamp(40px,6vw,76px);position:relative}
 .hero::before,.hero::after{content:"";position:absolute;border-radius:50%;filter:blur(72px);z-index:-1}
 .hero::before{width:520px;height:520px;top:-190px;right:-150px;background:radial-gradient(circle,rgba(167,150,232,.45),transparent 65%)}
@@ -328,6 +330,8 @@ section{padding-block:clamp(40px,5.5vw,72px)}
 /* ---------- экран 2 · как пройдёт час ---------- */
 .duo{display:grid;grid-template-columns:1.15fr .85fr;gap:16px;margin-top:1.8rem}
 @media(max-width:820px){.duo{grid-template-columns:1fr}}
+.cards4{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:1.8rem}
+@media(max-width:820px){.cards4{grid-template-columns:1fr}}
 .card{
   background:var(--card);border-radius:var(--radius-md);
   padding:clamp(20px,2.6vw,30px);
@@ -420,11 +424,10 @@ send('click',(b.getAttribute('data-cta')||b.getAttribute('data-link')||b.getAttr
   <div class="hero-grid">
     <div>
       <div class="when">14–17 октября <i>·</i> 4 дня <i>·</i> бесплатно</div>
-      <h1><span class="script">Попробуйте мой клуб изнутри</span>4 дня в клубе — бесплатно</h1>
-      <p class="lead">Каждое утро я буду присылать вам тренировку из моего закрытого клуба.</p>
+      <h1><span class="script">Включайте и повторяйте</span>4 дня с Татьяной Дембовской</h1>
+      <p class="lead">Заберите 4 дня бесплатных тренировок из моего закрытого клуба. Без страха навредить себе, без путаницы из интернет-роликов — просто включаете видео, и мы молодеем вместе.</p>
       <div class="zones">
-        <span>4 тренировки из клуба</span><span>В любое время дня</span>
-        <span>Порядок — как в клубе</span>
+        <span>Шея</span><span>Осанка</span><span>Овал</span><span>Глаза</span>
       </div>
 
       <div class="cta">
@@ -440,7 +443,7 @@ send('click',(b.getAttribute('data-cta')||b.getAttribute('data-link')||b.getAttr
             Во ВКонтакте
           </a>
         </div>
-        <p class="btn-note"><span>💬</span><span>Откроется чат с ботом — нажмите «Начать» (в Телеграме «Старт»), и я вас запишу.</span></p>
+        <p class="btn-note"><span>💬</span><span>Откроется чат — нажмите «Начать» (в Телеграме «Старт»), и я вас запишу.</span></p>
         <div class="cta-foot">Тренировки придут туда, где вы запишетесь, <b>с 14 октября каждое утро</b>.
         Перед стартом пришлю напоминание.</div>
       </div>
@@ -456,7 +459,48 @@ send('click',(b.getAttribute('data-cta')||b.getAttribute('data-link')||b.getAttr
   </div>
 </section>
 
-<!-- ============ ЭКРАН 2 · кто ведёт ============
+<!-- ============ ЭКРАН 2 · что произойдёт за 4 дня (07.10) ============ -->
+<section>
+  <div class="wrap">
+    <h2>Что произойдёт с вами за эти 4 дня?</h2>
+    <div class="cards4">
+      <div class="card">
+        <h3>Уйдёт «каша в голове»</h3>
+        <p>Больше не нужно собирать обрывки техник по всему интернету. У вас будет чёткий план: шея, осанка, овал, глаза.
+        Ничего не нужно придумывать — просто включаете и повторяете за мной.</p>
+      </div>
+      <div class="card">
+        <h3>Уйдёт страх «а вдруг я сделаю хуже»</h3>
+        <p>Я объясняю каждое движение. Вы будете понимать, что делаете и зачем, и спокойно повторять за мной.</p>
+      </div>
+      <div class="card">
+        <h3>Вы докажете себе, что можете не бросать</h3>
+        <p>Многие боятся: «Опять начну и брошу». Но эти 4 дня построены так, что вы пройдёте их легко и с удовольствием.</p>
+      </div>
+      <div class="card">
+        <h3>Вы почувствуете результат своими руками</h3>
+        <p>Шея станет свободнее, а утром лицо будет меньше отекать. И вы сами скажете: «Ого, а это работает!
+        Что же будет через два месяца?»</p>
+      </div>
+    </div>
+    <div class="cta" style="margin-top:1.8rem">
+        <div class="cta-title">Записаться на 4 дня в клубе</div>
+        <div class="cta-sub">Выберите, куда вам удобнее получать тренировки.</div>
+        <div class="btns">
+          <a class="btn btn-tg" href="/klub4/tg/" data-cta="tg">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.04 15.47 8.7 20.2c.48 0 .69-.2.94-.45l2.26-2.16 4.68 3.43c.86.48 1.47.23 1.7-.79l3.08-14.43c.3-1.28-.46-1.78-1.3-1.47L1.68 9.63c-1.25.48-1.23 1.17-.21 1.48l4.72 1.47L17.1 6.03c.51-.34.98-.15.6.19z"/></svg>
+            В Телеграме
+          </a>
+          <a class="btn btn-vk" href="/klub4/vk/" data-cta="vk">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.16 17.72c-5.5 0-8.98-3.86-9.12-10.25h2.77c.1 4.7 2.24 6.7 3.87 7.1V7.47h2.63v3.94c1.55-.17 3.18-2.02 3.73-3.94h2.6a7.5 7.5 0 0 1-3.4 4.92 7.76 7.76 0 0 1 3.98 5.33h-2.87c-.5-1.62-1.98-2.88-4.04-3.08v3.08z"/></svg>
+            Во ВКонтакте
+          </a>
+        </div>
+      </div>
+  </div>
+</section>
+
+<!-- ============ ЭКРАН 3 · кто ведёт ============
      Блок «Как пройдут эти 4 дня» (план по дням, «что вы получите», селфи) убран 03.10
      по решению Анны — вернём позже, когда будут выбраны тренировки. ============ -->
 <section class="soft">
@@ -497,7 +541,7 @@ send('click',(b.getAttribute('data-cta')||b.getAttribute('data-link')||b.getAttr
             Во ВКонтакте
           </a>
         </div>
-        <p class="btn-note"><span>💬</span><span>Откроется чат с ботом — нажмите «Начать» (в Телеграме «Старт»), и я вас запишу.</span></p>
+        <p class="btn-note"><span>💬</span><span>Откроется чат — нажмите «Начать» (в Телеграме «Старт»), и я вас запишу.</span></p>
     </div>
   </div>
 </section>
