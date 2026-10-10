@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Страница не найдена · Face Studio</title>
+<meta name="robots" content="noindex">
+<!-- GitHub Pages отдаёт этот файл на любой несуществующий адрес.
+     1) Частые опечатки (club4, klub, Klub4, 4dnya…) сразу уводим на нужную страницу.
+     2) Адрес с заглавными буквами пробуем в нижнем регистре.
+     3) Иначе — понятный экран со ссылкой на «4 дня в клубе».
+     Каждый такой заход попадает в счётчик (p = набранный адрес) — видно, что люди путают. -->
+<script>
+(function(){
+  var ALIASES = {
+    'klub4':'/klub4/','club4':'/klub4/','klub':'/klub4/','club':'/klub4/','klyb4':'/klub4/','kiub4':'/klub4/',
+    'klub-4':'/klub4/','club-4':'/klub4/','klub_4':'/klub4/','club_4':'/klub4/','klub4dnya':'/klub4/',
+    '4dnya':'/klub4/','4dnia':'/klub4/','4dnja':'/klub4/','4days':'/klub4/','4':'/klub4/',
+    'klub 4':'/klub4/','club 4':'/klub4/','клуб4':'/klub4/','клуб':'/klub4/','клуб 4':'/klub4/',
+    'efir':'/efir/','эфир':'/efir/','podarok':'/podarok/','подарок':'/podarok/'
+  };
+  var raw = location.pathname, path;
+  try { path = decodeURIComponent(raw); } catch(e) { path = raw; }
+  var seg = path.replace(/^\/+|\/+$/g,'').split('/')[0].toLowerCase().replace(/\.html?$/,'');
+  var target = ALIASES[seg];
+  if (!target && path !== path.toLowerCase()) target = path.toLowerCase();
+  // счётчик: что набрали (без cookie и IP), до редиректа
+  try{
+    var d=JSON.stringify({ev:'view',t:'404',h:location.hostname,p:raw,r:document.referrer,us:'',um:'',uc:'',cid:'',src:'',w:screen.width});
+    if(!(navigator.sendBeacon&&navigator.sendBeacon('https://club.facestudio.by/anketa/pv',new Blob([d],{type:'text/plain'}))))
+      fetch('https://club.facestudio.by/anketa/pv',{method:'POST',body:d,keepalive:true,mode:'no-cors'});
+  }catch(e){}
+  if (target && target !== raw) location.replace(target + location.search + location.hash);
+})();
+</script>
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box}
+  body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;
+    background:linear-gradient(178deg,#f7f5fd 0%,#efecfa 100%);
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:#2a2340}
+  .box{max-width:380px;text-align:center}
+  h1{font-size:1.4rem;line-height:1.3;margin:0 0 12px;color:#251a3d}
+  p{font-size:1.05rem;line-height:1.55;margin:0 0 24px;color:#3a3350}
+  a.btn{display:flex;align-items:center;justify-content:center;min-height:60px;padding:0 24px;margin-bottom:12px;border-radius:16px;
+    background:linear-gradient(180deg,#ffd977,#f5b731);color:#3d2b00;font-weight:700;font-size:1.08rem;text-decoration:none;
+    box-shadow:0 8px 22px rgba(28,20,48,.16)}
+  a.link{color:#5b46a0;font-size:1rem}
+</style>
+</head>
+<body>
+<div class="box">
+  <h1>Похоже, в адресе опечатка</h1>
+  <p>Такой страницы нет. Вот куда вы, скорее всего, хотели попасть:</p>
+  <a class="btn" href="/klub4/">4 дня в клубе — бесплатно</a>
+  <a class="link" href="/podarok/">Бесплатная тренировка «Упругая шея»</a>
+</div>
+</body>
+</html>
