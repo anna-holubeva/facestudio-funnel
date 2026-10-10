@@ -874,7 +874,7 @@ footer .brand{display:block;margin-bottom:.4rem}
 <script>
 (function(){var U='https://club.facestudio.by/anketa/pv',q=new URLSearchParams(location.search);
 function send(ev,t){try{var d=JSON.stringify({ev:ev,t:t||'',h:location.hostname,p:location.pathname,r:document.referrer,
-us:q.get('utm_source')||'',um:q.get('utm_medium')||'',uc:q.get('utm_campaign')||'',cid:q.get('cid')||'',
+us:q.get('utm_source')||q.get('u')||'',um:q.get('utm_medium')||'',uc:q.get('utm_campaign')||'',cid:q.get('cid')||'',
 src:q.get('p')||q.get('ct')||'',w:screen.width});
 if(!(navigator.sendBeacon&&navigator.sendBeacon(U,new Blob([d],{type:'text/plain'}))))
 fetch(U,{method:'POST',body:d,keepalive:true,mode:'no-cors'})}catch(e){}}
