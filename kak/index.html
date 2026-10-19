@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Face Studio</title>
+<meta name="robots" content="noindex,nofollow">
+<!-- Тест-драйв 21–24.10, «Как вам?» из Telegram (S16, dev-e8 19.10): ?cid=&sig=&d=<день>&a=1|0.
+     Ответ пишется через club.facestudio.by/anketa/pv (t = kak:d<день>:<1|0>, cid) → trial_chain.py answers → Salebot. -->
+<script>
+(function(){var U='https://club.facestudio.by/anketa/pv',q=new URLSearchParams(location.search);
+var d=(q.get('d')||'').replace(/\D/g,'').slice(0,1),a=q.get('a')==='0'?'0':'1';
+try{var b=JSON.stringify({ev:'click',t:'kak:d'+d+':'+a,h:location.hostname,p:location.pathname,r:document.referrer,
+us:'',um:'',uc:'',cid:(q.get('cid')||'').replace(/\D/g,''),src:'',w:screen.width});
+if(!(navigator.sendBeacon&&navigator.sendBeacon(U,new Blob([b],{type:'text/plain'}))))
+fetch(U,{method:'POST',body:b,keepalive:true,mode:'no-cors'})}catch(e){}})();
+</script>
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box}
+  body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;
+    background:linear-gradient(178deg,#f7f5fd 0%,#efecfa 100%);
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;
+    color:#2a2340;padding:24px 16px}
+  .box{text-align:center;max-width:360px;width:100%;background:#fff;border-radius:24px;padding:34px 24px 28px;
+    box-shadow:0 14px 40px rgba(37,26,61,.10)}
+  .em{font-size:3rem;line-height:1;margin-bottom:14px}
+  h1{font-size:1.45rem;line-height:1.25;color:#251a3d;margin:0 0 12px;font-weight:700}
+  p{font-size:1.08rem;line-height:1.55;color:#3a3350;margin:0 0 24px}
+  a.btn{display:flex;align-items:center;justify-content:center;width:100%;
+    min-height:56px;padding:0 24px;border-radius:999px;margin-top:12px;
+    background:linear-gradient(180deg,#ffd977,#f5b731);color:#3d2b00;
+    font-weight:700;font-size:1.08rem;text-decoration:none;
+    box-shadow:0 8px 22px rgba(28,20,48,.16)}
+  a.btn.alt{background:#efeafc;color:#4a3a78;box-shadow:none}
+  .hide{display:none}
+</style>
+</head>
+<body>
+<main class="box">
+  <section id="yes">
+    <div class="em">💜</div>
+    <h1>Умница!</h1>
+    <p>Завтра утром пришлю следующую.<br><br>Напишите, что почувствовали, — мне правда интересно.</p>
+    <a class="btn" href="https://t.me/facestudio_club_bot">Написать в чат</a>
+  </section>
+  <section id="no" class="hide">
+    <div class="em">🌸</div>
+    <h1>Ничего страшного</h1>
+    <p>Тренировка никуда не делась — сделайте, когда будет время. Все тренировки открыты до конца воскресенья.</p>
+    <a class="btn" id="lk" href="https://uroki.facestudio.online/">▶️ Открыть тренировку</a>
+    <a class="btn alt" href="https://t.me/facestudio_club_bot">Вернуться в чат</a>
+  </section>
+</main>
+<script>
+(function(){var q=new URLSearchParams(location.search);
+if(q.get('a')==='0'){document.getElementById('yes').className='hide';document.getElementById('no').className='';}
+var c=(q.get('cid')||'').replace(/\D/g,''),s=(q.get('sig')||'').replace(/[^0-9a-f]/gi,'');
+if(c&&s)document.getElementById('lk').href='https://uroki.facestudio.online/?cid='+c+'&sig='+s;})();
+</script>
+</body>
+</html>
