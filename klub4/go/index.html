@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>4 дня в клубе · Face Studio</title>
+<meta name="robots" content="noindex,nofollow">
+<!-- Запись на «4 дня» из Telegram в один шаг (S16, 20.10, решение Ани): ?cid=&s=<подпись>&u=<метка>.
+     Нажатие пишется через club.facestudio.by/anketa/pv (p=/klub4/go/, t=reg:<32 знака подписи>, cid) →
+     tg_fast.py на сервере проверяет подпись и записывает в Salebot («202610_КЛУБ») → «Ура» в чате за секунды.
+     Без cid/подписи — старый путь /klub4/tg/ (через «Запустить»). -->
+<script>
+(function(){var q=new URLSearchParams(location.search),c=(q.get('cid')||'').replace(/\D/g,''),
+s=(q.get('s')||'').replace(/[^0-9a-f]/gi,'').slice(0,32),u=(q.get('u')||'').replace(/[^\w-]/g,'').slice(0,40);
+if(!c||s.length<32){location.replace('/klub4/tg/'+(u?'?utm_source='+u:''));return}
+var U='https://club.facestudio.by/anketa/pv';
+try{var d=JSON.stringify({ev:'click',t:'reg:'+s,h:location.hostname,p:location.pathname,r:document.referrer,
+us:u,um:'',uc:'',cid:c,src:'',w:screen.width});
+if(!(navigator.sendBeacon&&navigator.sendBeacon(U,new Blob([d],{type:'text/plain'}))))
+fetch(U,{method:'POST',body:d,keepalive:true,mode:'no-cors'})}catch(e){}})();
+</script>
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box}
+  body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;
+    background:linear-gradient(178deg,#f7f5fd 0%,#efecfa 100%);
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;
+    color:#2a2340;padding:24px 16px}
+  .box{text-align:center;max-width:360px;width:100%;background:#fff;border-radius:24px;padding:34px 24px 28px;
+    box-shadow:0 14px 40px rgba(37,26,61,.10)}
+  .em{font-size:3rem;line-height:1;margin-bottom:14px}
+  h1{font-size:1.45rem;line-height:1.25;color:#251a3d;margin:0 0 12px;font-weight:700}
+  p{font-size:1.08rem;line-height:1.55;color:#3a3350;margin:0 0 24px}
+  a.btn{display:flex;align-items:center;justify-content:center;width:100%;
+    min-height:56px;padding:0 24px;border-radius:999px;
+    background:linear-gradient(180deg,#ffd977,#f5b731);color:#3d2b00;
+    font-weight:700;font-size:1.08rem;text-decoration:none;
+    box-shadow:0 8px 22px rgba(28,20,48,.16)}
+  .small{font-size:.92rem;color:#6b6385;margin:20px 0 0}
+  .small a{color:#4a3a78}
+</style>
+</head>
+<body>
+<main class="box">
+  <div class="em">🌸</div>
+  <h1>Записываем вас на 4 дня в клубе!</h1>
+  <p>Через несколько секунд в чате придёт сообщение «Ура!» с подарком — значит, всё получилось.</p>
+  <a class="btn" href="https://t.me/facestudio_club_bot">Вернуться в чат</a>
+  <p class="small">Сообщение не пришло за минуту? <a href="https://t.me/facestudio_club_bot?start=club4_tg">Нажмите сюда</a> и затем «Запустить» внизу чата.</p>
+</main>
+</body>
+</html>
