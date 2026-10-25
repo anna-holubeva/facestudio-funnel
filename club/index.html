@@ -3,22 +3,778 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Закрытый клуб Face Studio</title>
-<link rel="canonical" href="/">
-<meta name="robots" content="noindex,follow">
-<meta http-equiv="refresh" content="0; url=/">
+<title>Закрытый клуб Face Studio — естественное омоложение по подписке</title>
+<meta name="description" content="Клуб Татьяны Дембовской: 4 живые тренировки в неделю по 30 минут, готовая система и разбор вашей техники по видео. От 160 ₽ за занятие. Первая тренировка бесплатно.">
+<meta name="robots" content="index,follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Закрытый клуб Face Studio — естественное омоложение по подписке">
+<meta property="og:description" content="4 живые тренировки в неделю по 30 минут, готовая система и разбор вашей техники по видео. От 160 ₽ за занятие.">
+<link rel="preload" href="/fonts/golos-text-cyr.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/oswald-cyr.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/fonts/fonts.css">
 <style>
-  :root{color-scheme:light}
-  body{margin:0;min-height:100vh;display:grid;place-items:center;background:#f8f6fd;color:#251a3d;
-       font-family:'Golos Text','Segoe UI',system-ui,sans-serif;text-align:center;padding:24px}
-  a{color:#5b3fa8}
+/* Face Studio · витрина Закрытого клуба
+   Каркас — как на боевой /diagnostika/: широкий wrap, крупные секции, Oswald-градиент,
+   hero в две колонки, плавающие чипсы, появление при скролле.
+   Палитра — КЛУБНАЯ: лаванда фон, виноград «громкие» зоны, янтарь CTA.
+   Эргономика 55+: крупный текст, тап-цели ≥56px, контраст ≥4.5:1. */
+:root{
+  color-scheme:light;
+  --bg:#f8f6fd;
+  --bg-soft:#f1eefa;
+
+  --lav-050:#f3f0fc;
+  --lav-100:#e9e4f8;
+  --lav-200:#ded3f4;
+  --lav-300:#c9bbee;
+  --lav-500:#a796e8;
+  --lav-700:#7a63c9;
+
+  --grape-bg:#efe9fb;
+  --grape-ink:#251a3d;
+  --grape-deep:#4a3583;
+
+  --ink:#2a2340;
+  --ink-2:#3a3350;
+  --ink-soft:#655e83;
+
+  --a1:#ffd977;
+  --a2:#f2b23e;
+  --a-ink:#3d2c05;
+  --a-deep:#7a5a13;
+  --a-050:#fdf4dd;
+
+  --ok:#3f7d5e;
+  --no:#a34452;
+
+  --card:#fff;
+  --radius-lg:28px;
+  --radius-md:20px;
+  --radius-sm:14px;
+  --shadow-soft:0 28px 56px -26px rgba(62,44,120,.44);
+  --shadow-card:0 16px 38px -20px rgba(62,44,120,.32);
+  --shadow-row:0 8px 22px -12px rgba(62,44,120,.26);
+
+  --f-display:'Oswald','Arial Narrow',sans-serif;
+  --f-body:'Golos Text',-apple-system,'Segoe UI',sans-serif;
+  --f-hand:'Marck Script',cursive;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--f-body);
+  background:var(--bg);
+  color:var(--ink);
+  font-size:18px;
+  line-height:1.6;
+  overflow-x:hidden;
+  -webkit-text-size-adjust:100%;
+}
+/* размытые пятна у шапки вылезали за край — страницу можно было утащить вбок;
+   overflow-x на одном body не помогает, браузер берёт его с html */
+html,body{overflow-x:hidden}
+img{max-width:100%;display:block}
+a{touch-action:manipulation}
+:focus-visible{outline:3px solid var(--lav-500);outline-offset:3px;border-radius:8px}
+
+/* ---------- типографика ---------- */
+h1,h2{
+  font-family:var(--f-display);
+  text-transform:uppercase;
+  font-weight:700;
+  line-height:1.12;
+  letter-spacing:.015em;
+  background:linear-gradient(178deg,#5b46a0 0%,#251a3d 78%);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:var(--grape-ink);
+}
+h1{font-size:clamp(1.95rem,4.2vw + .9rem,3.4rem)}
+h2{font-size:clamp(1.55rem,2.6vw + .8rem,2.45rem)}
+h3{font-family:var(--f-body);font-weight:600;font-size:1.08rem;color:var(--grape-deep)}
+.script{
+  display:block;font-family:var(--f-hand);
+  text-transform:none;font-weight:400;letter-spacing:0;
+  background:none;-webkit-text-fill-color:currentColor;
+  color:var(--grape-deep);
+  font-size:clamp(1.5rem,2.2vw + 1rem,2.5rem);
+  line-height:1.15;margin-bottom:.3rem;
+}
+.lead{color:var(--ink-2);font-size:clamp(1.02rem,.4vw + .92rem,1.18rem)}
+.para{color:var(--ink-soft);margin-top:1.1rem}
+strong,b{color:var(--grape-ink);font-weight:600}
+
+/* ---------- каркас ---------- */
+.wrap{max-width:1080px;margin-inline:auto;padding-inline:clamp(18px,4vw,32px)}
+section{padding-block:clamp(52px,8vw,104px)}
+.section-head{max-width:44rem}
+.section-head.center{margin-inline:auto;text-align:center}
+.section-head .lead{margin-top:1rem}
+
+/* ---------- шапка ---------- */
+.topbar{display:flex;justify-content:space-between;align-items:center;padding-block:20px 0;font-size:.84rem}
+.brand{font-family:var(--f-display);font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--grape-deep)}
+.topbar span{color:var(--ink-soft)}
+@media(max-width:560px){.topbar span{display:none}}
+
+/* ---------- hero ---------- */
+.hero{padding-block:clamp(28px,5vw,60px) clamp(52px,8vw,96px);position:relative}
+.hero::before,.hero::after{content:"";position:absolute;border-radius:50%;filter:blur(72px);z-index:-1}
+.hero::before{width:520px;height:520px;top:-180px;right:-140px;background:radial-gradient(circle,rgba(167,150,232,.45),transparent 65%)}
+.hero::after{width:420px;height:420px;bottom:-160px;left:-160px;background:radial-gradient(circle,rgba(255,217,119,.3),transparent 65%)}
+.hero-grid{display:grid;gap:clamp(28px,4vw,56px);align-items:center}
+@media(min-width:880px){.hero-grid{grid-template-columns:1.08fr .92fr}}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:.5em;
+  background:var(--card);border:1px solid var(--lav-200);
+  border-radius:999px;padding:.5em 1.1em;
+  font-size:.84rem;font-weight:600;color:var(--grape-deep);
+  box-shadow:var(--shadow-row);margin-bottom:1.2rem;
+}
+.hero .lead{margin-top:1.1rem;max-width:34em}
+.hero .btn-row{flex-direction:column;align-items:stretch;max-width:390px}
+.hero .btn{flex:0 0 auto;max-width:none}
+.meta{display:flex;flex-wrap:wrap;gap:.4em 1.4em;align-items:center;margin-top:1.2rem;font-size:.92rem;color:var(--ink-soft)}
+.meta i{font-style:normal}
+.meta i:not(:last-child)::after{content:" ·";color:var(--lav-300)}
+
+.portrait{position:relative}
+.portrait-frame{
+  position:relative;border-radius:var(--radius-lg);overflow:hidden;
+  background:linear-gradient(168deg,var(--lav-050) 8%,var(--lav-100) 48%,var(--lav-300) 115%);
+  box-shadow:var(--shadow-soft);
+}
+.portrait-frame::before{content:"";display:block;padding-top:106%}
+.portrait-frame img{position:absolute;inset:auto 0 0 0;width:100%;height:98%;object-fit:cover;object-position:top center}
+.chip{
+  position:absolute;z-index:2;
+  background:var(--card);border-radius:14px;
+  box-shadow:var(--shadow-card);
+  padding:.65em 1em;font-size:.86rem;font-weight:600;color:var(--grape-ink);
+}
+.chip b{display:block;font-family:var(--f-display);font-size:1.15rem;font-weight:600;color:var(--grape-deep)}
+.chip-price{top:22px;right:-10px;animation:float 5.5s ease-in-out infinite}
+.chip-week{bottom:26px;left:-12px;animation:float 6.5s ease-in-out 1.2s infinite}
+@media(max-width:879px){
+  .portrait{width:100%;max-width:430px;margin-inline:auto}
+  .chip-price{right:6px}.chip-week{left:6px}
+}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+
+/* ---------- кнопки ---------- */
+.cta-label{font-weight:600;margin-top:1.7rem;margin-bottom:.9rem;color:var(--ink-2)}
+.btn-row{display:flex;flex-wrap:wrap;gap:14px}
+.btn{
+  flex:1 1 290px;max-width:390px;min-height:58px;
+  display:inline-flex;align-items:center;justify-content:center;gap:.6em;
+  font-family:var(--f-body);font-weight:800;font-size:.95rem;
+  letter-spacing:.02em;text-transform:uppercase;text-decoration:none;text-align:center;
+  color:var(--a-ink);
+  background:linear-gradient(180deg,var(--a1),var(--a2));
+  border-radius:16px;padding:1em 1.4em;border:0;cursor:pointer;
+  box-shadow:0 16px 30px -12px rgba(242,178,62,.6),inset 0 1.5px 0 rgba(255,255,255,.65);
+  transition:transform .25s cubic-bezier(.22,1,.36,1),box-shadow .25s;
+}
+.btn:hover{transform:translateY(-3px);box-shadow:0 22px 36px -12px rgba(242,178,62,.62),inset 0 1.5px 0 rgba(255,255,255,.65)}
+.btn:active{transform:translateY(-1px)}
+.btn-ghost{
+  background:transparent;color:var(--grape-deep);
+  border:2px solid var(--lav-300);box-shadow:none;font-weight:700;
+}
+.btn-ghost:hover{background:var(--lav-050);box-shadow:none;transform:translateY(-3px)}
+.btn-note{color:var(--ink-soft);font-size:.92rem;margin-top:.9rem;max-width:34em}
+@media(max-width:560px){.btn{max-width:none}}
+
+/* ---------- секция на подложке ---------- */
+.band{
+  background:linear-gradient(180deg,var(--bg-soft),#efe9fb);
+  border-radius:clamp(28px,5vw,48px);
+}
+.band-gold{background:linear-gradient(168deg,#fdf7e8,#fbeecd)}
+
+/* ---------- сетки карточек ---------- */
+.grid{display:grid;gap:16px;margin-top:2.2rem}
+.grid-2{grid-template-columns:repeat(auto-fit,minmax(420px,1fr))}
+.grid-3{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.tile{
+  background:var(--card);border-radius:var(--radius-md);
+  box-shadow:var(--shadow-card);border:1px solid rgba(122,99,201,.12);
+  padding:22px 24px;
+}
+.tile-mark{font-size:1.2rem;line-height:1;margin-bottom:.6rem;display:block}
+.tile p{font-size:1rem;line-height:1.5;color:var(--ink-2)}
+.tile-title{font-weight:600;color:var(--grape-ink);margin-bottom:.35rem;font-size:1.05rem}
+
+/* ---------- состав клуба ---------- */
+.checks{list-style:none;display:grid;gap:14px;margin-top:2rem}
+@media(min-width:760px){.checks{grid-template-columns:1fr 1fr}}
+.checks li{
+  display:flex;gap:.8em;align-items:flex-start;
+  background:var(--card);border-radius:var(--radius-md);
+  box-shadow:var(--shadow-row);border:1px solid rgba(122,99,201,.12);
+  padding:18px 20px;font-size:1rem;line-height:1.5;color:var(--ink-2);
+}
+.checks .mark{flex:none;font-size:1.1rem;line-height:1.4}
+.pull{
+  margin-top:2rem;padding:24px 28px;
+  background:linear-gradient(168deg,var(--grape-bg),var(--lav-100));
+  border-radius:var(--radius-md);font-size:1.06rem;line-height:1.5;color:var(--ink-2);
+}
+
+/* ---------- таймлайн ---------- */
+.tl{display:grid;gap:16px;margin-top:2.2rem}
+@media(min-width:820px){.tl{grid-template-columns:repeat(3,1fr)}}
+.tl-item{
+  background:var(--card);border-radius:var(--radius-md);
+  box-shadow:var(--shadow-card);border:1px solid rgba(122,99,201,.12);
+  border-top:5px solid var(--a2);padding:24px;
+}
+.tl-when{
+  display:inline-block;margin-bottom:.9rem;
+  background:var(--a-050);color:var(--a-deep);
+  border-radius:999px;padding:5px 15px;font-size:.92rem;font-weight:700;
+}
+.tl-item ul{list-style:none;display:flex;flex-direction:column;gap:.6rem;margin-top:.6rem}
+.tl-item li{display:flex;gap:.6em;font-size:1rem;line-height:1.45;color:var(--ink-2)}
+.tl-item>p{color:var(--ink-soft);font-size:.98rem}
+.honest{
+  margin-top:2rem;padding:24px 28px;
+  background:var(--a-050);border:2px solid var(--a1);border-radius:var(--radius-md);
+}
+.honest-title{font-weight:700;color:var(--a-deep);margin-bottom:.5rem;font-size:1.08rem}
+.honest p{color:var(--ink-2);font-size:1.02rem}
+
+/* ---------- как устроено ---------- */
+.day{display:grid;gap:14px;margin-top:2.2rem}
+@media(min-width:760px){.day{grid-template-columns:1fr 1fr}}
+.day-row{
+  display:flex;gap:1.2em;align-items:flex-start;
+  background:var(--card);border-radius:var(--radius-md);
+  box-shadow:var(--shadow-row);border:1px solid rgba(122,99,201,.12);
+  border-left:4px solid var(--lav-300);padding:20px 22px;
+}
+.day-when{flex:none;width:110px;color:var(--grape-deep);font-weight:600;font-size:.96rem;line-height:1.35}
+.day-what{color:var(--ink-2);font-size:1rem;line-height:1.5}
+@media(max-width:560px){.day-row{flex-direction:column;gap:.4em}.day-when{width:auto}}
+
+/* ---------- вопрос-ответ ---------- */
+.qa{display:flex;flex-direction:column;gap:12px;margin-top:2.2rem;max-width:48rem}
+.qa-item{
+  background:var(--card);border-radius:var(--radius-md);
+  box-shadow:var(--shadow-row);border:1px solid rgba(122,99,201,.12);overflow:hidden;
+}
+.qa-q{
+  display:flex;align-items:center;gap:14px;
+  padding:20px 24px;min-height:62px;cursor:pointer;list-style:none;
+  font-weight:600;font-size:1.05rem;line-height:1.35;color:var(--grape-ink);
+}
+.qa-q::-webkit-details-marker{display:none}
+.qa-q::after{
+  content:"";flex:none;margin-left:auto;
+  width:11px;height:11px;border-right:2.5px solid var(--lav-500);border-bottom:2.5px solid var(--lav-500);
+  transform:rotate(45deg) translate(-3px,-3px);transition:transform .2s ease-out;
+}
+.qa-item[open]{border-color:var(--lav-300)}
+.qa-item[open] .qa-q::after{transform:rotate(-135deg) translate(-2px,-2px)}
+.qa-a{
+  margin:0 16px 16px;padding:20px 22px;
+  background:linear-gradient(168deg,var(--grape-bg),var(--lav-100));
+  border-radius:var(--radius-sm);color:var(--ink-2);font-size:1.02rem;line-height:1.55;
+}
+
+/* ---------- Татьяна ---------- */
+.expert-grid{display:grid;gap:clamp(28px,4vw,60px);align-items:center}
+@media(min-width:820px){.expert-grid{grid-template-columns:.85fr 1.15fr}}
+.expert-photo{position:relative;max-width:420px;margin-inline:auto;width:100%}
+.expert-photo .portrait-frame::before{padding-top:112%}
+.chip-age{
+  bottom:26px;left:-12px;
+  background:linear-gradient(180deg,var(--a1),var(--a2));color:var(--a-ink);
+  font-family:var(--f-display);font-size:1.05rem;font-weight:600;letter-spacing:.05em;
+  padding:.55em 1.1em;border-radius:14px;
+  box-shadow:0 12px 26px -8px rgba(242,178,62,.55);
+}
+@media(max-width:819px){.chip-age{left:10px}}
+.expert-grid p{margin-bottom:1rem;font-size:1.05rem;line-height:1.6;color:var(--ink-2)}
+.facts{display:flex;flex-wrap:wrap;gap:10px;margin-top:1.4rem}
+.fact{background:var(--lav-100);color:var(--grape-deep);border-radius:999px;padding:8px 18px;font-size:.95rem;font-weight:600}
+
+/* ---------- отзывы ---------- */
+.stories{display:grid;gap:16px;margin-top:16px}
+@media(min-width:760px){.stories{grid-template-columns:1fr 1fr}}
+.story{
+  background:var(--card);border-radius:var(--radius-md);
+  box-shadow:var(--shadow-card);border:1px solid rgba(122,99,201,.12);padding:24px;
+}
+.story-who{font-weight:700;color:var(--grape-deep);margin-bottom:.6rem;font-size:1rem}
+.story-text{color:var(--ink-2);font-size:1.02rem;line-height:1.55;font-style:italic}
+
+/* ---------- цена ---------- */
+.tariffs{display:grid;gap:18px;margin-top:2.2rem}
+@media(min-width:720px){.tariffs{grid-template-columns:1fr 1fr;align-items:start}}
+.tariff{
+  position:relative;background:var(--card);border-radius:var(--radius-md);
+  box-shadow:var(--shadow-card);border:2px solid var(--lav-200);padding:28px;
+}
+.tariff.best{border-color:var(--a2);box-shadow:var(--shadow-soft)}
+.tariff-badge{
+  position:absolute;top:-14px;right:22px;
+  background:linear-gradient(180deg,var(--a1),var(--a2));color:var(--a-ink);
+  border-radius:999px;padding:5px 16px;font-size:.8rem;font-weight:800;
+  text-transform:uppercase;letter-spacing:.05em;
+}
+.tariff-term{color:var(--grape-deep);font-weight:600;font-size:1.05rem;margin-bottom:.5rem}
+.tariff-price{font-family:var(--f-display);font-weight:600;font-size:2.4rem;color:var(--grape-ink);line-height:1.05}
+.tariff-old{color:var(--ink-soft);text-decoration:line-through;font-size:1.1rem;margin-left:12px;font-family:var(--f-body);font-weight:400}
+.tariff-note{color:var(--ink-soft);font-size:.98rem;margin-top:.6rem}
+.included{margin-top:2rem;padding:26px 28px;background:linear-gradient(168deg,var(--grape-bg),var(--lav-100));border-radius:var(--radius-md)}
+.included ul{list-style:none;display:grid;gap:.7rem;margin-top:1rem}
+@media(min-width:760px){.included ul{grid-template-columns:1fr 1fr}}
+.included li{display:flex;gap:.6em;font-size:1rem;color:var(--ink-2)}
+.after-pay{margin-top:1.6rem;padding:20px 24px;background:var(--card);border-radius:var(--radius-md);box-shadow:var(--shadow-row);border:1px solid rgba(122,99,201,.12);font-size:1rem;line-height:1.55;color:var(--ink-2)}
+
+/* ---------- противопоказания ---------- */
+.warn{padding:28px 32px;background:var(--a-050);border:2px solid var(--a1);border-radius:var(--radius-md);max-width:48rem}
+.warn-title{font-family:var(--f-display);text-transform:uppercase;font-weight:600;font-size:1.25rem;color:var(--a-deep);margin-bottom:.8rem;letter-spacing:.02em}
+.warn p{color:var(--ink-2);font-size:1.02rem;margin-bottom:.9rem}
+.warn p:last-child{margin-bottom:0}
+.warn a{color:var(--a-deep);font-weight:700}
+
+/* ---------- финал ---------- */
+.finale{padding-bottom:clamp(60px,9vw,110px)}
+.finale-card{
+  background:linear-gradient(160deg,var(--lav-050) 0%,var(--lav-100) 55%,#cdbdf0 130%);
+  border-radius:clamp(28px,5vw,48px);
+  padding:clamp(40px,7vw,84px) clamp(24px,5vw,72px);
+  text-align:center;position:relative;overflow:hidden;
+}
+.finale-card::before{
+  content:"";position:absolute;width:380px;height:380px;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,255,255,.6),transparent 65%);top:-140px;right:-100px;
+}
+.finale-inner{position:relative;max-width:640px;margin-inline:auto}
+.finale p{color:var(--ink-2);font-size:1.08rem;line-height:1.6;margin-top:1rem}
+.finale .btn-row{justify-content:center;margin-top:2rem}
+.finale .btn{flex:0 1 270px}
+@media(max-width:560px){.finale .btn{flex:1 1 200px}}
+
+/* ---------- подвал ---------- */
+footer{padding:36px 0 44px;text-align:center;font-size:.92rem;color:var(--ink-soft);border-top:2px solid var(--lav-200)}
+.foot-brand{font-family:var(--f-display);letter-spacing:.16em;text-transform:uppercase;color:var(--grape-deep);font-weight:600;margin-bottom:1rem}
+footer a{color:var(--ink-soft);text-decoration:underline;display:inline-block;padding:8px 6px}
+
+/* ---------- появление при скролле ---------- */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .55s cubic-bezier(.22,1,.36,1),transform .55s cubic-bezier(.22,1,.36,1);transition-delay:var(--d,0s)}
+.reveal.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;transition:none}
+  .chip-price,.chip-week{animation:none}
+  html{scroll-behavior:auto}
+}
 </style>
 </head>
 <body>
-  <div>
-    <p>Страница клуба переехала на главную.</p>
-    <p><a href="/">Открыть →</a></p>
+
+<div class="wrap topbar">
+  <div class="brand">Face Studio</div>
+  <span>закрытый клуб · Татьяна Дембовская</span>
+</div>
+
+<!-- ── 1. Первый экран ── -->
+<header class="hero wrap">
+  <div class="hero-grid">
+    <div>
+      <span class="eyebrow reveal">Клуб естественного омоложения</span>
+      <h1 class="reveal" style="--d:.05s">
+        <span class="script">Лицо можно вернуть как в молодости</span>
+        Без уколов, из дома, по системе
+      </h1>
+      <p class="lead reveal" style="--d:.1s"><b>4 живые тренировки в неделю по 30 минут.</b> Вам не нужно решать, что делать сегодня, а что завтра — я всё продумала. Включайте и повторяйте за мной.</p>
+      <div class="meta reveal" style="--d:.15s">
+        <i>от 160 ₽ за занятие</i>
+        <i>женщины от 30 до 75 лет</i>
+        <i>первая тренировка бесплатно</i>
+      </div>
+      <div class="btn-row reveal" style="--d:.2s;margin-top:1.8rem">
+        <a class="btn" href="https://go.facestudio.online/podarok/?u=club-lp" data-cta="free-top">Прийти на бесплатную тренировку</a>
+        <a class="btn btn-ghost" href="#price" data-cta="sub-top">Я уже всё знаю — хочу абонемент</a>
+      </div>
+      <p class="btn-note reveal" style="--d:.25s">Одна полная тренировка, бесплатно. Ничего оплачивать не нужно.</p>
+    </div>
+    <div class="portrait reveal" style="--d:.15s">
+      <div class="portrait-frame"><img src="assets/tatiana-hero.webp" alt="Татьяна Дембовская"></div>
+      <div class="chip chip-price"><b>160 ₽</b>за занятие</div>
+      <div class="chip chip-week"><b>4 раза</b>в неделю живьём</div>
+    </div>
   </div>
-  <script>location.replace('/' + location.search + location.hash);</script>
+</header>
+
+<!-- ── 2. Узнавание ── -->
+<section>
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <h2>Вы здесь, если это про вас</h2>
+    </div>
+    <div class="grid grid-2">
+      <div class="tile reveal"><span class="tile-mark">🔸</span>
+        <div class="tile-title">Вы что-то делаете — но обрывками</div>
+        <p>Ролик оттуда, упражнение отсюда, купленный курс лежит непройденным. В голове каша, а результат встал.</p>
+      </div>
+      <div class="tile reveal" style="--d:.08s"><span class="tile-mark">🔸</span>
+        <div class="tile-title">Вы посмотрели в зеркало и не узнали себя</div>
+        <p>Стресс, болезнь, похудение — и лицо будто обвалилось за один день. «Ходишь-ходишь и в один день понимаешь, что всё — ты не персик».</p>
+      </div>
+      <div class="tile reveal" style="--d:.16s"><span class="tile-mark">🔸</span>
+        <div class="tile-title">Вы боитесь навредить себе руками</div>
+        <p>Один эксперт говорит напрягать, другой — расслаблять. И вы перестали делать вообще.</p>
+      </div>
+      <div class="tile reveal" style="--d:.24s"><span class="tile-mark">🔸</span>
+        <div class="tile-title">Вы покупали и бросали</div>
+        <p>И дело не в лени: уроки выложили все разом, отчитываться не перед кем — вот оно и упало в копилку, где лежит до сих пор.</p>
+      </div>
+    </div>
+    <p class="lead reveal" style="max-width:44rem;margin:2.2rem auto 0;text-align:center">Причина у всего этого одна: <b>рядом не было ни системы, ни человека, у которого можно спросить, правильно ли вы делаете.</b> Лень и возраст тут ни при чём.</p>
+  </div>
+</section>
+
+<!-- ── 3. Что такое Клуб ── -->
+<section class="band">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Что такое Закрытый клуб Face Studio</h2>
+      <p class="lead">Это <b>тренировки красоты по подписке</b>. Марафон кончается через две недели и оставляет вас одну, а клуб работает всё время, пока он вам нужен.</p>
+    </div>
+    <ul class="checks">
+      <li class="reveal"><span class="mark">✅</span><span><b>4 живые тренировки в неделю со мной</b> — понедельник–четверг, 19:00 МСК, по 30 минут. И пятая в субботу — сразу в записи, делаете когда удобно</span></li>
+      <li class="reveal" style="--d:.06s"><span class="mark">✅</span><span><b>Не успели вживую — записи ждут вас</b>. Все записи недели лежат в кабинете до вечера понедельника — успеете позаниматься и в выходные. Больше половины участниц занимаются именно так</span></li>
+      <li class="reveal" style="--d:.12s"><span class="mark">✅</span><span><b>Личный кабинет: 50+ уроков</b> — дополнительные тренировки, которые усиливают результат общих: шея, осанка, тейпирование, дыхание, стопы, массажи, тело. Вход по ссылке из бота, без паролей</span></li>
+      <li class="reveal" style="--d:.18s"><span class="mark">✅</span><span><b>Закрытый чат</b> — на вопросы по технике отвечаю лично я. А если нужно проверить движение, снимаете короткое видео, и я его разбираю</span></li>
+      <li class="reveal" style="--d:.24s"><span class="mark">✅</span><span><b>Каждые 2–3 месяца — что-то новое:</b> мини-курс, марафон или новый блок тренировок</span></li>
+    </ul>
+    <div class="pull reveal"><b>Что это меняет:</b> вам больше не нужно решать, что делать сегодня. Расписание и последовательность продуманы. Вы включаете и повторяете.</div>
+  </div>
+</section>
+
+<!-- ── 4. Честный таймлайн ── -->
+<section>
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Что и когда вы увидите</h2>
+      <p class="lead">Скажу честно, потому что завышенные ожидания — главная причина, по которой женщины бросают на третьей неделе.</p>
+    </div>
+    <div class="tl">
+      <div class="tl-item reveal">
+        <span class="tl-when">Первые 2–3 недели</span>
+        <p>То, что приходит раньше лица:</p>
+        <ul>
+          <li>🔹 уходит утренняя отёчность, лицо перестаёт быть «надутым»</li>
+          <li>🔹 расправляются плечи, уходит тяжесть в шее</li>
+          <li>🔹 появляются силы — кровоток и лимфа наконец пошли</li>
+        </ul>
+      </div>
+      <div class="tl-item reveal" style="--d:.08s">
+        <span class="tl-when">К 6–8 неделе</span>
+        <p>Начинает меняться само лицо:</p>
+        <ul>
+          <li>🔹 подтягивается овал, уходит второй подбородок</li>
+          <li>🔹 разглаживаются носогубки и межбровье</li>
+          <li>🔹 поднимаются веки, взгляд открывается</li>
+        </ul>
+      </div>
+      <div class="tl-item reveal" style="--d:.16s">
+        <span class="tl-when">К 3–6 месяцу</span>
+        <p>Результат, который замечают другие. Именно на этом сроке участницы слышат «что ты с собой сделала?».</p>
+      </div>
+    </div>
+    <div class="honest reveal">
+      <div class="honest-title">⚠️ Чего я вам не обещаю</div>
+      <p>Что вы помолодеете за месяц. Так не работает — ни у кого. Первый месяц вы разгоняетесь, результат накапливается. Если вам обещают лицо за две недели — вам обещают то, чего не будет.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── 5. Как устроено ── -->
+<section class="band">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Как это выглядит в жизни</h2>
+    </div>
+    <div class="day">
+      <div class="day-row reveal">
+        <div class="day-when">19:00 МСК, понедельник</div>
+        <div class="day-what">Вы включаете Zoom с телефона или компьютера. Я на экране, рядом ещё несколько сотен женщин. 30 минут повторяем вместе. Я объясняю каждое движение: что делаем, зачем, что должно чувствоваться.</div>
+      </div>
+      <div class="day-row reveal" style="--d:.06s">
+        <div class="day-when">Не попали в 19:00</div>
+        <div class="day-what">Открываете запись, когда удобно — вечером, утром, в выходные. Тренировка та же самая.</div>
+      </div>
+      <div class="day-row reveal" style="--d:.12s">
+        <div class="day-when">Появился вопрос</div>
+        <div class="day-what">Пишете в чат клуба — отвечаю я лично.</div>
+      </div>
+      <div class="day-row reveal" style="--d:.18s">
+        <div class="day-when">Нужна отдельная тема</div>
+        <div class="day-what">Отёки, шея, осанка, тейпирование? Открываете личный кабинет: 50+ уроков разложены по темам.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 6. Бесплатный вход ── -->
+<section style="padding-block:clamp(28px,4vw,52px)">
+  <div class="wrap">
+    <div class="band band-gold" style="padding:clamp(36px,5vw,64px) clamp(24px,4vw,56px)">
+      <div class="section-head reveal" style="max-width:42rem">
+        <h2>🎁 Сначала попробуйте. Бесплатно</h2>
+        <p class="lead">Давайте вы попробуете и решите сами.</p>
+        <p class="lead" style="margin-top:1rem">Нажмите кнопку — и получите <b>полную тренировку «Молодая шея»</b>: целое занятие со мной от начала до конца, такое же, как идёт в клубе.</p>
+        <p class="lead" style="margin-top:1rem">Первый сдвиг многие замечают уже после 2–3 повторов. Как сказала одна участница: <em>«я раза три сделала эти упражнения — и сразу большой результат, шейка подтянулась»</em>.</p>
+        <p class="lead" style="margin-top:1rem">Сделайте — и решайте уже по своему лицу, а не по моим словам.</p>
+      </div>
+      <div class="btn-row reveal" style="margin-top:2rem">
+        <a class="btn" href="https://go.facestudio.online/podarok/?u=club-lp" data-cta="free-mid">Забрать бесплатную тренировку</a>
+      </div>
+      <p class="btn-note reveal">Я сразу пришлю вам ссылку на тренировку — смотреть можно с телефона, регистрироваться не нужно.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── 7. Почему не сработало ── -->
+<section>
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Почему то, что вы пробовали, не дало результата</h2>
+      <p class="lead">Вы делали то, что вам предлагали. Беда в том, как это было устроено.</p>
+    </div>
+    <div class="grid grid-2">
+      <div class="tile reveal" style="border-left:4px solid var(--no)">
+        <div class="tile-title">❌ Бесплатные ролики в интернете</div>
+        <p>Ролики бывают отличные. Но вместе они не складываются: вы не знаете, что за чем, сколько раз и когда остановиться. И спросить не у кого — а неправильное движение работает против вас.</p>
+      </div>
+      <div class="tile reveal" style="--d:.08s;border-left:4px solid var(--no)">
+        <div class="tile-title">❌ Курсы и марафоны</div>
+        <p>Все уроки выкладывают сразу, отчитываться не перед кем. Вы посмотрели, сделали пару раз — и оно легло в копилку. А потом марафон кончился, и вы снова одна.</p>
+      </div>
+      <div class="tile reveal" style="--d:.16s;border-left:4px solid var(--no)">
+        <div class="tile-title">❌ Уколы и процедуры</div>
+        <p>Год от силы — и всё по новой. Дорого, повторять надо вечно, а причина никуда не девается.</p>
+      </div>
+      <div class="tile reveal" style="--d:.24s;border-left:4px solid var(--no)">
+        <div class="tile-title">❌ Кремы</div>
+        <p>Второй подбородок кремом не убирается. Овал — тоже.</p>
+      </div>
+    </div>
+    <div class="pull reveal" style="border-left:5px solid var(--ok)"><b>✅ Что делает клуб иначе:</b> вы получаете готовую систему, расписание, которое не даёт откладывать, и меня в чате, когда что-то непонятно.</div>
+  </div>
+</section>
+
+<!-- ── 8. Страхи ── -->
+<section class="band">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Что обычно останавливает</h2>
+    </div>
+    <div class="qa">
+      <details class="qa-item reveal">
+        <summary class="qa-q">А вдруг я наврежу себе?</summary>
+        <div class="qa-a">Это правильный страх — руками навредить действительно можно. Поэтому в клубе вы не остаётесь одна: на каждой тренировке я показываю и проговариваю каждое движение — что делаем, что должно чувствоваться, где остановиться. Не поняли движение — спрашиваете в чате, отвечаю я. И отдельно: <b>в первый абонемент входит личная проверка вашей техники по видео</b> — записываете, как выполняете, я смотрю и подсказываю.</div>
+      </details>
+      <details class="qa-item reveal">
+        <summary class="qa-q">Не растянется ли кожа от массажа?</summary>
+        <div class="qa-a">Кожа не растягивается — это миф. Она подстраивается под то, что под ней: когда ткани спазмированы, застоялись и потеряли объём, кожа ложится складкой. Массаж работает именно с этим — включает кровоток и лимфоотток, снимает спазм, возвращает тканям объём. Кожа тогда ложится ровно. Бояться стоит бездействия: застой сам не рассасывается.</div>
+      </details>
+      <details class="qa-item reveal">
+        <summary class="qa-q">Я куплю и брошу, как всегда</summary>
+        <div class="qa-a">Поэтому в клубе всё держится на расписании: сегодня среда — значит в 19:00 занятие. В чате вас ждут. А по четвергам мы сравниваем фотографии, и вы своими глазами видите себя месяц назад и сегодня.</div>
+      </details>
+      <details class="qa-item reveal">
+        <summary class="qa-q">В моём возрасте уже поздно</summary>
+        <div class="qa-a">В клубе занимаются женщины от 30 до 75 лет. Ирине 77, она с нами полгода: «все говорят, что я похорошела лет на 10, если не больше». Кровоток, лимфа и мышцы откликаются в любом возрасте — так устроена физиология, и по паспорту она не отключается.</div>
+      </details>
+      <details class="qa-item reveal">
+        <summary class="qa-q">Я не разберусь — я не дружу с компьютером</summary>
+        <div class="qa-a">Ни паролей, ни регистраций. Вы нажимаете одну ссылку в боте — и вы внутри. Тренировки открываются в один клик. Если что-то не открылось — пишете в чат, вам помогут в тот же день.</div>
+      </details>
+      <details class="qa-item reveal">
+        <summary class="qa-q">У меня нет времени на 19:00</summary>
+        <div class="qa-a">Больше половины участниц никогда не занимаются вживую — только по записям, и результат у них такой же. Часовые пояса, работа, вечерние дела — это нормально, записи здесь не второй сорт. А сама тренировка идёт 30 минут, меньше одной серии.</div>
+      </details>
+      <details class="qa-item reveal">
+        <summary class="qa-q">Я не умею оплачивать онлайн</summary>
+        <div class="qa-a">Это проще, чем кажется, и вы будете не одна. Мы проводим за руку: показываем, куда нажать, и остаёмся на связи, пока не получится. Если что-то не пойдёт, напишите нам — ангелы заботы (так мы зовём нашу поддержку) доведут оплату до конца вместе с вами. А ещё можно просто попросить дочь, внучку или подругу — это две минуты.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ── 9. Кто ведёт ── -->
+<section>
+  <div class="wrap">
+    <div class="expert-grid">
+      <div class="expert-photo reveal">
+        <div class="portrait-frame"><img src="assets/tati-form.webp" alt="Татьяна Дембовская, косметолог-эстетист"></div>
+        <div class="chip chip-age">57 лет</div>
+      </div>
+      <div>
+        <h2 class="reveal" style="margin-bottom:1.4rem">Кто я</h2>
+        <p class="reveal" style="--d:.05s">Меня зовут <b>Татьяна Дембовская</b>, мне 57 лет, я дипломированный косметолог-эстетист.</p>
+        <p class="reveal" style="--d:.1s">Десять лет назад после укола ботокса я чуть не потеряла зрение. Проснулась утром и почти ничего не видела: врачи сначала подозревали инсульт, потом поставили интоксикацию. Зрение вернулось не полностью — часть поля зрения у меня отсутствует до сих пор.</p>
+        <p class="reveal" style="--d:.15s">Тогда я начала искать способ работать с лицом, не вмешиваясь в организм. Нашла. И сейчас, в 57, нравлюсь себе больше, чем в 40. Никакой волшебной таблетки я не нашла. Просто научилась работать с телом, а не против него.</p>
+        <div class="facts reveal" style="--d:.2s">
+          <span class="fact">6 лет практики</span>
+          <span class="fact">более 1000 живых тренировок</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 10. Результаты ── -->
+<section class="band">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Как это выглядит у наших женщин</h2>
+    </div>
+    <div class="stories">
+      <div class="story reveal">
+        <div class="story-who">Ирина, 60 · в клубе 5 месяцев</div>
+        <div class="story-text">«Мне никогда не нравился мой лоб — межбровка, неровности, всегда закрывала чёлкой. Сейчас мне нравится свой лоб, и чёлку я не ношу. Ещё прекратились головокружения».</div>
+      </div>
+      <div class="story reveal" style="--d:.08s">
+        <div class="story-who">Ирина, 77 · в клубе 6 месяцев</div>
+        <div class="story-text">«Сначала результата не видела. Сейчас он проявился — постепенно. Особенно заметен тем, кто не видел меня давно: все говорят, что я похорошела лет на десять».</div>
+      </div>
+      <div class="story reveal" style="--d:.16s">
+        <div class="story-who">Виктория, 59</div>
+        <div class="story-text">«Изменился цвет лица, кожа стала упругой. Комплименты делают даже женщины».</div>
+      </div>
+      <div class="story reveal" style="--d:.24s">
+        <div class="story-who">Людмила, 69</div>
+        <div class="story-text">«Я в своём возрасте себе нравлюсь. И окружающие отмечают изменения — и на работе, и близкие».</div>
+      </div>
+      <div class="story reveal" style="--d:.32s">
+        <div class="story-who">Эльмира</div>
+        <div class="story-text">«Я уже год не пью таблетки от давления, потому что занимаюсь в Клубе».</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 11. Цена ── -->
+<section id="price">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>💰 Сколько стоит</h2>
+      <p class="lead">Живые тренировки с обратной связью по рынку стоят 20–40 тысяч рублей в месяц. Одна процедура у косметолога — от 15 000 ₽, и её нужно повторять.</p>
+    </div>
+    <div class="tariffs">
+      <div class="tariff reveal">
+        <div class="tariff-term">1 месяц</div>
+        <div class="tariff-price">4 990 ₽<span class="tariff-old">8 990 ₽</span></div>
+        <div class="tariff-note">Разгон: тело включается, уходят отёки</div>
+      </div>
+      <div class="tariff best reveal" style="--d:.08s">
+        <span class="tariff-badge">рекомендую</span>
+        <div class="tariff-term">2 месяца</div>
+        <div class="tariff-price">6 990 ₽<span class="tariff-old">13 990 ₽</span></div>
+        <div class="tariff-note">От 160 ₽ за занятие. Столько нужно, чтобы началось само лицо</div>
+      </div>
+    </div>
+    <p class="lead reveal" style="margin-top:1.8rem"><b>Почему советую сразу два месяца:</b> первый месяц вы разгоняетесь, во второй начинается само лицо. За месяц тело только просыпается, а лицо начинает меняться на второй.</p>
+    <div class="included reveal">
+      <h3>Что входит в любой абонемент</h3>
+      <ul>
+        <li>🔹 4 живые тренировки в неделю + пятая в субботу, в записи</li>
+        <li>🔹 Личный кабинет: 50+ уроков</li>
+        <li>🔹 Закрытый чат с ответами от меня</li>
+        <li>🔹 Личная проверка вашей техники по видео</li>
+      </ul>
+    </div>
+    <div class="after-pay reveal"><b>Что будет после оплаты.</b> Вы сразу получаете ссылку на личный кабинет и приглашение в закрытый чат. Если сегодня понедельник–четверг, ближайшая живая тренировка — уже в 19:00. Записи прошлой недели уже открыты — начинать можно, не дожидаясь понедельника.</div>
+    <div class="btn-row reveal" style="margin-top:2rem">
+      <a class="btn" href="https://go.facestudio.online/podarok/?u=club-lp" data-cta="free-price">Прийти на бесплатную тренировку</a>
+      <a class="btn btn-ghost" href="https://efir.facestudio.online/pay?offer=base&amp;plan=2m&amp;src=klub-lp" data-cta="sub-price">Оформить абонемент</a>
+    </div>
+    <p class="btn-note reveal">Первая кнопка — если ещё не пробовали.</p>
+  </div>
+</section>
+
+<!-- ── 12. Противопоказания ── -->
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="warn reveal">
+      <div class="warn-title">⚠️ Кому заниматься нельзя</div>
+      <p>Честно скажу сразу: клуб подходит не всем. Есть состояния, при которых тренировки противопоказаны — онкология, острые воспаления, недавние операции и процедуры, некоторые заболевания сосудов и щитовидной железы.</p>
+      <p><b>Прочитайте полный список до оплаты</b> → <a href="https://go.facestudio.online/rules/">Противопоказания</a></p>
+      <p>Если у вас есть хроническое заболевание — посоветуйтесь с врачом. Мы работаем с телом, а не вместо медицины.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── 13. Финал ── -->
+<section class="finale">
+  <div class="wrap">
+    <div class="finale-card">
+      <div class="finale-inner">
+        <h2 class="reveal">Представьте</h2>
+        <p class="reveal" style="--d:.05s">Проходит месяц, второй. Вы смотрите утром в зеркало — и не ищете глазами, что не так: овал чётче, взгляд открытый, отёков нет.</p>
+        <p class="reveal" style="--d:.1s">И главное: вы больше не гадаете, что делать со своим лицом. Вы знаете, что делать, — а если засомневаетесь в технике, снимете короткое видео, и я вас поправлю.</p>
+        <p class="reveal" style="--d:.15s">Приходите. Начните с бесплатной тренировки — а дальше решите сами.</p>
+        <div class="btn-row reveal" style="--d:.2s">
+          <a class="btn" href="https://go.facestudio.online/podarok/?u=club-lp" data-cta="free-final">Прийти на бесплатную тренировку</a>
+          <a class="btn btn-ghost" href="https://efir.facestudio.online/pay?offer=base&amp;plan=2m&amp;src=klub-lp" data-cta="sub-final">Оформить абонемент</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-brand">Face Studio · Закрытый клуб</div>
+    <div>Татьяна Дембовская</div>
+    <div style="margin-top:.6rem">
+      <a href="https://go.facestudio.online/rules/">Противопоказания</a> ·
+      <a href="/oferta/">Договор оферты</a> ·
+      <a href="/politika/">Политика конфиденциальности</a>
+    </div>
+    <div>
+      <a href="https://t.me/facestudio_club_bot">Telegram</a> ·
+      <a href="https://vk.com/club202385574">ВКонтакте</a>
+    </div>
+    <div style="margin-top:1.1rem">
+      <img src="assets/pay-logos.webp" alt="Принимаем Visa, Mastercard, Белкарт и МИР, оплата с подтверждением 3-D Secure"
+           width="550" height="51" style="max-width:min(100%,560px);height:auto;margin-inline:auto;opacity:.75">
+    </div>
+    <div style="margin-top:.8rem;font-size:.84rem;line-height:1.7">
+      ИП Дембовская Татьяна Александровна · УНП 591968874<br>
+      Зарегистрирован Администрацией Октябрьского района г. Гродно<br>
+      г. Гродно, ул. Томина, 6б, кв. 55 · novayamolodost@gmail.com
+    </div>
+  </div>
+</footer>
+
+<script>
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+  });
+}, { threshold: .12, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+<!-- Посещаемость (без cookie, без IP): просмотр + клики по кнопкам -> club.facestudio.by/anketa/pv. Статистика: сверка базы/funnel_stats.py -->
+<!-- ВАЖНО: при публикации добавить домен витрины в PV_HOSTS в app.py, иначе сервер её заходы отбросит -->
+<script>
+(function(){var U='https://club.facestudio.by/anketa/pv',q=new URLSearchParams(location.search);
+function send(ev,t){try{var d=JSON.stringify({ev:ev,t:t||'',h:location.hostname,p:location.pathname,r:document.referrer,
+us:q.get('utm_source')||q.get('u')||'',um:q.get('utm_medium')||'',uc:q.get('utm_campaign')||'',cid:q.get('cid')||'',
+src:q.get('p')||q.get('ct')||'',w:screen.width});
+if(!(navigator.sendBeacon&&navigator.sendBeacon(U,new Blob([d],{type:'text/plain'}))))
+fetch(U,{method:'POST',body:d,keepalive:true,mode:'no-cors'})}catch(e){}}
+send('view');
+document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('.btn,[data-cta]');if(!b)return;
+var all=[].slice.call(document.querySelectorAll('.btn,[data-cta]'));
+send('click',(b.getAttribute('data-cta')||b.getAttribute('data-link')||b.getAttribute('data-plat')||b.id||'btn')+'@'+(all.indexOf(b)+1))},true);
+})();
+</script>
 </body>
 </html>
