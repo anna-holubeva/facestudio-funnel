@@ -175,6 +175,8 @@ html,body{overflow-x:hidden}
 }
 .cta-title{font-family:var(--f-body);font-weight:600;font-size:1.05rem;color:var(--grape-ink);margin-bottom:.3rem}
 .cta-sub{color:var(--ink-soft);font-size:.96rem;margin-bottom:1.05rem}
+.btns-one{grid-template-columns:1fr}
+.btn-club{background:linear-gradient(180deg,var(--a1),var(--a2));color:var(--a-ink,#3d2c05);box-shadow:0 14px 28px -14px rgba(242,178,62,.75)}
 .btns{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 @media(max-width:640px){.btns{grid-template-columns:1fr}}
 .btn{
@@ -319,28 +321,19 @@ send('click',(b.getAttribute('data-cta')||b.getAttribute('data-link')||b.getAttr
   <div class="hero-grid">
     <div>
       <div class="when">21–24 октября <i>·</i> 4 дня <i>·</i> бесплатно</div>
-      <h1><span class="script">Бесплатный тест-драйв закрытого клуба омоложения</span>4 дня с Татьяной Дембовской: включайте и повторяйте</h1>
-      <p class="lead">Заберите 4 дня бесплатных тренировок молодости из моего закрытого клуба. Без страха навредить себе, без путаницы из интернет-роликов — просто включаете видео, и мы молодеем вместе.</p>
+      <h1><span class="script">Тест-драйв закрытого клуба — он уже прошёл</span>4 дня с Татьяной Дембовской, 21–24 октября</h1>
+      <p class="lead">Четыре дня бесплатных тренировок молодости из моего закрытого клуба. Без страха навредить себе, без путаницы из интернет-роликов — просто включаете видео, и мы молодеем вместе. <b>Эти дни прошли, но клуб работает дальше.</b></p>
       <div class="zones">
         <span>Шея</span><span>Осанка</span><span>Овал</span><span>Глаза</span>
       </div>
 
       <div class="cta">
-        <div class="cta-title">Записаться на 4 дня в клубе</div>
-        <div class="cta-sub">Выберите, куда вам удобнее получать тренировки.</div>
-        <div class="btns">
-          <a class="btn btn-tg" href="/klub4/tg/" data-cta="tg">
-            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.04 15.47 8.7 20.2c.48 0 .69-.2.94-.45l2.26-2.16 4.68 3.43c.86.48 1.47.23 1.7-.79l3.08-14.43c.3-1.28-.46-1.78-1.3-1.47L1.68 9.63c-1.25.48-1.23 1.17-.21 1.48l4.72 1.47L17.1 6.03c.51-.34.98-.15.6.19z"/></svg>
-            В Телеграме
-          </a>
-          <a class="btn btn-vk" href="/klub4/vk/" data-cta="vk">
-            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.16 17.72c-5.5 0-8.98-3.86-9.12-10.25h2.77c.1 4.7 2.24 6.7 3.87 7.1V7.47h2.63v3.94c1.55-.17 3.18-2.02 3.73-3.94h2.6a7.5 7.5 0 0 1-3.4 4.92 7.76 7.76 0 0 1 3.98 5.33h-2.87c-.5-1.62-1.98-2.88-4.04-3.08v3.08z"/></svg>
-            Во ВКонтакте
-          </a>
+        <div class="cta-title">Запись на тест-драйв закрыта</div>
+        <div class="cta-sub">Четыре дня прошли, тренировки больше не рассылаем. Но клуб работает:
+        живые занятия идут каждую неделю, и прийти можно в любой момент.</div>
+        <div class="btns btns-one">
+          <a class="btn btn-club" href="https://facestudio.by/" data-cta="club">Условия клуба</a>
         </div>
-        <p class="btn-note"><span>💬</span><span>Откроется чат — нажмите «Начать» (в Телеграме «Старт»), и я вас запишу.</span></p>
-        <div class="cta-foot">Тренировки придут туда, где вы запишетесь, <b>с 21 октября каждое утро</b>.
-        Перед стартом пришлю напоминание.</div>
       </div>
     </div>
 
@@ -396,18 +389,12 @@ send('click',(b.getAttribute('data-cta')||b.getAttribute('data-link')||b.getAttr
       </div>
     </div>
 
-    <div class="cta" style="margin-top:1.8rem">
-        <div class="cta-title">Записаться на 4 дня в клубе</div>
-        <div class="cta-sub">Выберите, куда вам удобнее получать тренировки.</div>
-        <div class="btns">
-          <a class="btn btn-tg" href="/klub4/tg/" data-cta="tg">
-            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.04 15.47 8.7 20.2c.48 0 .69-.2.94-.45l2.26-2.16 4.68 3.43c.86.48 1.47.23 1.7-.79l3.08-14.43c.3-1.28-.46-1.78-1.3-1.47L1.68 9.63c-1.25.48-1.23 1.17-.21 1.48l4.72 1.47L17.1 6.03c.51-.34.98-.15.6.19z"/></svg>
-            В Телеграме
-          </a>
-          <a class="btn btn-vk" href="/klub4/vk/" data-cta="vk">
-            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.16 17.72c-5.5 0-8.98-3.86-9.12-10.25h2.77c.1 4.7 2.24 6.7 3.87 7.1V7.47h2.63v3.94c1.55-.17 3.18-2.02 3.73-3.94h2.6a7.5 7.5 0 0 1-3.4 4.92 7.76 7.76 0 0 1 3.98 5.33h-2.87c-.5-1.62-1.98-2.88-4.04-3.08v3.08z"/></svg>
-            Во ВКонтакте
-          </a>
+    <div class="cta">
+        <div class="cta-title">Запись на тест-драйв закрыта</div>
+        <div class="cta-sub">Четыре дня прошли, тренировки больше не рассылаем. Но клуб работает:
+        живые занятия идут каждую неделю, и прийти можно в любой момент.</div>
+        <div class="btns btns-one">
+          <a class="btn btn-club" href="https://facestudio.by/" data-cta="club">Условия клуба</a>
         </div>
       </div>
   </div>
@@ -442,20 +429,13 @@ send('click',(b.getAttribute('data-cta')||b.getAttribute('data-link')||b.getAttr
       встретимся на большом прямом эфире и подведём итоги.</p>
     </div>
     <div class="cta">
-      <div class="cta-title">Записаться на 4 дня в клубе</div>
-      <div class="cta-sub">Тренировки придут туда, где вам удобнее.</div>
-      <div class="btns">
-          <a class="btn btn-tg" href="/klub4/tg/" data-cta="tg">
-            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.04 15.47 8.7 20.2c.48 0 .69-.2.94-.45l2.26-2.16 4.68 3.43c.86.48 1.47.23 1.7-.79l3.08-14.43c.3-1.28-.46-1.78-1.3-1.47L1.68 9.63c-1.25.48-1.23 1.17-.21 1.48l4.72 1.47L17.1 6.03c.51-.34.98-.15.6.19z"/></svg>
-            В Телеграме
-          </a>
-          <a class="btn btn-vk" href="/klub4/vk/" data-cta="vk">
-            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.16 17.72c-5.5 0-8.98-3.86-9.12-10.25h2.77c.1 4.7 2.24 6.7 3.87 7.1V7.47h2.63v3.94c1.55-.17 3.18-2.02 3.73-3.94h2.6a7.5 7.5 0 0 1-3.4 4.92 7.76 7.76 0 0 1 3.98 5.33h-2.87c-.5-1.62-1.98-2.88-4.04-3.08v3.08z"/></svg>
-            Во ВКонтакте
-          </a>
+        <div class="cta-title">Запись на тест-драйв закрыта</div>
+        <div class="cta-sub">Четыре дня прошли, тренировки больше не рассылаем. Но клуб работает:
+        живые занятия идут каждую неделю, и прийти можно в любой момент.</div>
+        <div class="btns btns-one">
+          <a class="btn btn-club" href="https://facestudio.by/" data-cta="club">Условия клуба</a>
         </div>
-        <p class="btn-note"><span>💬</span><span>Откроется чат — нажмите «Начать» (в Телеграме «Старт»), и я вас запишу.</span></p>
-    </div>
+      </div>
   </div>
 </section>
 
