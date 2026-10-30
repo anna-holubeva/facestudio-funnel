@@ -3,298 +3,117 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>4 дня с Татьяной Дембовской — бесплатно</title>
-<meta name="description" content="21–24 октября — 4 дня в закрытом клубе Татьяны Дембовской бесплатно. Каждое утро — тренировка из клуба, 24 октября — большой прямой эфир.">
-<meta name="robots" content="index,follow">
-<meta property="og:type" content="website">
-<meta property="og:title" content="4 дня с Татьяной Дембовской — бесплатно">
-<meta property="og:description" content="21–24 октября. Каждое утро — тренировка из моего клуба.">
-<meta property="og:image" content="https://go.facestudio.online/klub4/assets/tatiana-hero.webp">
+<title>Эфир «Молодость не на один день» · Face Studio</title>
+<meta name="robots" content="noindex">
 <link rel="preload" href="/fonts/golos-text-cyr.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/fonts/oswald-cyr.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/fonts/fonts.css">
+<!-- Повтор эфира 31.10/01.11 (30.10, Штаб 8). Сюда ведут кнопка «Хочу в клуб» из ответа на КЛУБ
+     и старые ссылки из описаний эфира (efir2410). До END — запись на повтор: кнопки → /klub4/tg/, /klub4/vk/
+     → блок «Ура» 2146051601, путь Г. После END — прежнее «Запись закрыта», выкатывать заново не нужно.
+     Откат: git checkout d6897b5 -- klub4/ -->
 <style>
-/* Face Studio · лендинг записи «4 дня в клубе бесплатно» (21–24.10.2026) + эфир 24.10
-   Собран 03.10.2026 на основе лендинга эфира 29.08 (три экрана, та же вёрстка).
-   Оффер — запуск-октябрь-2026/оффер-4-дня-в-клубе.md.
-   Палитра — КЛУБНАЯ: лаванда фон, виноград «громкие» зоны, янтарь CTA.
-   Взята один-в-один с витрины клуба (AJTBD\лендинг-клуба\index.html).
-   Эргономика 55+: базовый кегль 18px, тап-цели ≥ 60px, контраст ≥ 4.5:1. */
 :root{
   color-scheme:light;
-  --bg:#f8f6fd;
-  --bg-soft:#f1eefa;
-
-  --lav-100:#e9e4f8;
-  --lav-200:#ded3f4;
-  --lav-500:#a796e8;
-  --grape-deep:#4a3583;
-  --grape-ink:#251a3d;
-
-  --ink:#2a2340;
-  --ink-2:#3a3350;
-  --ink-soft:#655e83;
-
-  --a1:#ffd977;
-  --a2:#f2b23e;
-  --a-ink:#3d2c05;
-  --a-deep:#7a5a13;
-  --a-050:#fdf4dd;
-
-  /* кнопки мессенджеров: цвета площадок, уведённые к фиолетовому,
-     чтобы читались как «телеграм» и «вконтакте», но не спорили с лавандой */
-  --tg1:#3aa3dc;
-  --tg2:#2b83b8;
-  --vk:#3d63e0;
-  --vk2:#2f4bc4;
-
-  --ok:#3f7d5e;
-  --no:#a34452;
-
-  --card:#fff;
-  --radius-lg:28px;
-  --radius-md:20px;
-  --radius-sm:14px;
-  --shadow-soft:0 28px 56px -26px rgba(62,44,120,.44);
+  --bg:#f8f6fd;--lav-100:#e9e4f8;--grape-deep:#4a3583;--grape-ink:#251a3d;
+  --ink:#2a2340;--ink-2:#3a3350;--ink-soft:#655e83;
+  --a1:#ffd977;--a2:#f2b23e;--a-ink:#3d2c05;--a-050:#fdf4dd;
+  --tg1:#3aa3dc;--tg2:#2b83b8;--vk:#3d63e0;--vk2:#2f4bc4;
+  --card:#fff;--radius-lg:28px;--radius-sm:14px;
   --shadow-card:0 16px 38px -20px rgba(62,44,120,.32);
-  --shadow-row:0 8px 22px -12px rgba(62,44,120,.26);
-
   --f-display:'Oswald','Arial Narrow',sans-serif;
   --f-body:'Golos Text',-apple-system,'Segoe UI',sans-serif;
   --f-hand:'Marck Script',cursive;
 }
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-  font-family:var(--f-body);
-  background:var(--bg);
-  color:var(--ink);
-  font-size:18px;
-  line-height:1.6;
-  overflow-x:hidden;
-  -webkit-text-size-adjust:100%;
-}
-img{max-width:100%;display:block}
-a{touch-action:manipulation}
-:focus-visible{outline:3px solid var(--lav-500);outline-offset:3px;border-radius:8px}
-
-/* ---------- типографика ---------- */
-h1,h2{
-  font-family:var(--f-display);
-  text-transform:uppercase;
-  font-weight:700;
-  line-height:1.12;
-  letter-spacing:.015em;
-  background:linear-gradient(178deg,#5b46a0 0%,#251a3d 78%);
-  -webkit-background-clip:text;background-clip:text;
-  -webkit-text-fill-color:transparent;color:var(--grape-ink);
-}
-h1{font-size:clamp(1.95rem,4.2vw + .9rem,3.3rem)}
-h2{font-size:clamp(1.45rem,2.2vw + .8rem,2.1rem)}
-h3{font-family:var(--f-body);font-weight:600;font-size:1.06rem;color:var(--grape-deep)}
-.script{
-  display:block;font-family:var(--f-hand);
-  text-transform:none;font-weight:400;letter-spacing:0;
-  background:none;-webkit-text-fill-color:currentColor;
-  color:var(--grape-deep);
-  font-size:clamp(1.4rem,2vw + 1rem,2.1rem);
-  line-height:1.15;margin-bottom:.3rem;
-}
-.lead{color:var(--ink-2);font-size:clamp(1.02rem,.4vw + .92rem,1.16rem)}
-strong,b{color:var(--grape-ink);font-weight:600}
-
-/* ---------- каркас ---------- */
-.wrap{max-width:1080px;margin-inline:auto;padding-inline:clamp(18px,4vw,32px)}
-section{padding-block:clamp(40px,5.5vw,72px)}
-.soft{background:var(--bg-soft)}
-
-/* ---------- шапка ---------- */
-.topbar{display:flex;justify-content:space-between;align-items:center;padding-block:20px 0;font-size:.84rem}
-.brand{font-family:var(--f-display);font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--grape-deep)}
-.topbar span{color:var(--ink-soft)}
-@media(max-width:560px){.topbar span{display:none}}
-
-/* ---------- экран 1 · анонс и запись ---------- */
-/* размытые пятна шапки вылезали за правый край — на телефоне страницу можно было утащить вбок */
-html,body{overflow-x:hidden}
-.hero{padding-block:clamp(22px,4vw,44px) clamp(40px,6vw,76px);position:relative}
-.hero::before,.hero::after{content:"";position:absolute;border-radius:50%;filter:blur(72px);z-index:-1}
-.hero::before{width:520px;height:520px;top:-190px;right:-150px;background:radial-gradient(circle,rgba(167,150,232,.45),transparent 65%)}
-.hero::after{width:400px;height:400px;bottom:-170px;left:-160px;background:radial-gradient(circle,rgba(255,217,119,.32),transparent 65%)}
-.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(26px,3.5vw,52px);align-items:center}
-@media(max-width:900px){.hero-grid{grid-template-columns:1fr}}
-
-.when{
-  display:inline-flex;flex-wrap:wrap;align-items:center;gap:.5rem .8rem;
-  background:linear-gradient(135deg,var(--a1),var(--a2));
-  color:var(--a-ink);font-weight:700;
-  padding:.55rem 1.1rem;border-radius:999px;
-  font-size:clamp(.92rem,.3vw + .86rem,1.02rem);
-  box-shadow:0 10px 24px -14px rgba(180,130,20,.9);
-  margin-bottom:1rem;
-}
-.when i{font-style:normal;opacity:.55}
-.hero h1{margin-bottom:.9rem}
-.hero .lead{max-width:33rem}
-
-/* строка зон под лидом */
-.zones{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.1rem}
-.zones span{
-  background:var(--lav-100);color:var(--grape-deep);
-  font-weight:600;font-size:.94rem;
-  padding:.42rem .9rem;border-radius:999px;
-}
-
-/* ---------- фото ---------- */
-/* .shot-wrap не обрезает — на нём висят чипсы; .shot обрезает картинку по радиусу */
-.shot-wrap{position:relative}
-.shot{position:relative;border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-soft);background:var(--lav-100)}
-.shot img{width:100%;height:auto;aspect-ratio:1/1.08;object-fit:cover;object-position:50% 16%}
-.chip{
-  position:absolute;background:rgba(255,255,255,.94);
-  backdrop-filter:blur(6px);
-  border-radius:999px;padding:.48rem .9rem;
-  font-size:.87rem;font-weight:600;color:var(--grape-deep);
-  box-shadow:var(--shadow-row);white-space:nowrap;
-}
-.chip-1{top:8%;left:-14px}
-.chip-2{bottom:9%;right:-10px}
-@media(max-width:900px){
-  .shot-wrap{max-width:420px;margin-inline:auto}
-  .chip-1{left:0}.chip-2{right:0}
-}
-@media(max-width:420px){.chip{font-size:.8rem;padding:.4rem .76rem}}
-
-/* ---------- блок кнопок ---------- */
-.cta{
-  background:var(--card);border-radius:var(--radius-lg);
-  padding:clamp(20px,3vw,30px);
-  box-shadow:var(--shadow-card);
-  border:1px solid var(--lav-100);
-  margin-top:1.6rem;
-}
-.cta-title{font-family:var(--f-body);font-weight:600;font-size:1.05rem;color:var(--grape-ink);margin-bottom:.3rem}
-.cta-sub{color:var(--ink-soft);font-size:.96rem;margin-bottom:1.05rem}
-.btns-one{grid-template-columns:1fr}
-.btn-club{background:linear-gradient(180deg,var(--a1),var(--a2));color:var(--a-ink,#3d2c05);box-shadow:0 14px 28px -14px rgba(242,178,62,.75)}
+body{font-family:var(--f-body);background:var(--bg);color:var(--ink);
+     font-size:18px;line-height:1.55;padding:24px 16px 40px}
+.wrap{max-width:34rem;margin:0 auto}
+.photo{display:block;width:210px;height:210px;object-fit:cover;object-position:50% 18%;
+       border-radius:50%;margin:0 auto 1.1rem;box-shadow:var(--shadow-card);background:#efeaf9}
+.script{display:block;text-align:center;font-family:var(--f-hand);font-size:1.7rem;line-height:1.1;color:var(--grape-deep)}
+h1{font-family:var(--f-display);font-weight:600;text-transform:uppercase;letter-spacing:.01em;text-align:center;
+   font-size:clamp(1.9rem,6vw,2.4rem);line-height:1.1;color:var(--grape-ink);margin:.25rem 0 1.1rem}
+.lead{color:var(--ink-2);margin-bottom:1rem}
+.dates{background:var(--a-050);border:1px solid #f4dfa8;border-radius:var(--radius-sm);
+       padding:.85rem 1rem;margin-bottom:1.1rem;color:var(--a-ink)}
+.dates p+p{margin-top:.25rem}
+.list{list-style:none}
+.list li{display:flex;gap:.6rem;align-items:flex-start;margin-bottom:.6rem;color:var(--ink-2)}
+.list li span:first-child{flex:none;width:1.4rem;text-align:center;color:var(--grape-deep);font-weight:700}
+.cta{background:var(--card);border-radius:var(--radius-lg);padding:clamp(20px,5vw,30px);
+     box-shadow:var(--shadow-card);border:1px solid var(--lav-100);margin-top:1.4rem}
+.cta-title{font-weight:700;font-size:1.1rem;color:var(--grape-ink);margin-bottom:.3rem}
+.cta-sub{color:var(--ink-soft);font-size:.98rem;margin-bottom:1.05rem}
 .btns{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 @media(max-width:640px){.btns{grid-template-columns:1fr}}
-.btn{
-  display:flex;align-items:center;justify-content:center;gap:.6rem;
-  min-height:64px;padding:.9rem 1.1rem;
-  border-radius:var(--radius-sm);
-  font-family:var(--f-body);font-weight:700;font-size:1.05rem;
-  color:#fff;text-decoration:none;text-align:center;
-  transition:transform .16s ease,box-shadow .16s ease;
-}
+.btn{display:flex;align-items:center;justify-content:center;gap:.6rem;min-height:64px;padding:.9rem 1.1rem;
+     border-radius:var(--radius-sm);font-family:var(--f-body);font-weight:700;font-size:1.05rem;
+     color:#fff;text-decoration:none;text-align:center}
 .btn svg{width:26px;height:26px;flex:none}
-.btn:hover{transform:translateY(-2px)}
 .btn-tg{background:linear-gradient(135deg,var(--tg1),var(--tg2));box-shadow:0 14px 28px -14px rgba(43,131,184,.9)}
 .btn-vk{background:linear-gradient(135deg,var(--vk),var(--vk2));box-shadow:0 14px 28px -14px rgba(47,75,196,.9)}
-.btn-note{
-  margin-top:.55rem;font-size:.85rem;line-height:1.45;color:var(--ink-soft);
-  display:flex;gap:.4rem;align-items:flex-start;
-}
-.btn-note b{color:var(--grape-deep)}
-.cta-foot{
-  margin-top:1.05rem;padding-top:.95rem;border-top:1px solid var(--lav-100);
-  font-size:.92rem;color:var(--ink-soft);
-}
-.cta-foot b{color:var(--grape-deep)}
-
-/* ---------- экран 2 · как пройдёт час ---------- */
-.duo{display:grid;grid-template-columns:1.15fr .85fr;gap:16px;margin-top:1.8rem}
-@media(max-width:820px){.duo{grid-template-columns:1fr}}
-.cards4{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:1.8rem}
-/* ---------- подарок за запись ---------- */
-.gift{display:grid;max-width:880px;margin-inline:auto;grid-template-columns:minmax(0,330px) 1fr;gap:clamp(18px,3vw,44px);align-items:center;
-  background:linear-gradient(150deg,#fdf6e6 0%,#f6efff 62%,#efe9fb 100%);
-  border:1px solid var(--lav-200);border-radius:var(--radius-lg);
-  padding:clamp(22px,3vw,40px);margin-top:1.8rem;box-shadow:var(--shadow-card)}
-.gift-shots{position:relative;padding:4px 0;max-width:330px}
-.gift-shots img{display:block;height:auto;border-radius:14px;box-shadow:0 18px 40px -18px rgba(62,44,120,.55)}
-.gift-shots .cover{width:78%;transform:rotate(-4deg);position:relative;z-index:2}
-.gift-shots .inside{width:66%;position:absolute;right:0;top:18%;transform:rotate(6deg);z-index:1}
-.gift-tag{display:inline-block;background:linear-gradient(180deg,var(--a1),var(--a2));color:var(--a-ink);
-  font-weight:700;font-size:.9rem;padding:.4rem .95rem;border-radius:999px;margin-bottom:.9rem}
-.gift h2{margin-bottom:.7rem}
-.gift ul{list-style:none;display:grid;gap:.7rem;margin:1.1rem 0 0}
-.gift li{display:grid;grid-template-columns:auto 1fr;gap:.7rem;align-items:baseline;font-size:1rem}
-.gift li span:first-child{color:var(--a-deep);font-weight:700}
-.gift-foot{margin-top:1.1rem;color:var(--ink-soft);font-size:.98rem}
-@media(max-width:820px){
-  .gift{grid-template-columns:1fr;gap:20px}
-  .gift-shots{max-width:330px;margin-inline:auto;width:100%}
-  .gift-shots .cover{width:70%}
-  .gift-shots .inside{width:60%;right:2%;top:18%}
-}
-@media(max-width:820px){.cards4{grid-template-columns:1fr}}
-.card{
-  background:var(--card);border-radius:var(--radius-md);
-  padding:clamp(20px,2.6vw,30px);
-  box-shadow:var(--shadow-card);border:1px solid var(--lav-100);
-}
-.card h3{margin-bottom:1rem}
-.plan{display:grid;gap:.72rem;list-style:none}
-.plan li{display:grid;grid-template-columns:auto 1fr;gap:.85rem;align-items:baseline;font-size:1rem}
-.plan .t{
-  font-family:var(--f-display);font-weight:600;font-size:.98rem;
-  color:var(--grape-deep);letter-spacing:.03em;
-}
-.prep{display:grid;gap:.72rem;list-style:none}
-.prep li{display:grid;grid-template-columns:auto 1fr;gap:.7rem;align-items:baseline;font-size:1rem}
-.prep .tick{color:var(--ok);font-weight:700}
-.prep-note{
-  margin-top:1.1rem;background:var(--a-050);border:1px solid #f0dfae;
-  border-radius:var(--radius-sm);padding:.85rem 1rem;
-  color:var(--a-deep);font-size:.94rem;line-height:1.5;
-}
-
-/* полоса «кто ведёт» + противопоказания */
-.strip{
-  display:grid;grid-template-columns:auto 1fr auto;gap:1.1rem;align-items:center;
-  background:var(--card);border-radius:var(--radius-md);
-  padding:1rem 1.3rem;margin-top:16px;
-  box-shadow:var(--shadow-row);border:1px solid var(--lav-100);
-}
-@media(max-width:760px){.strip{grid-template-columns:auto 1fr;gap:.9rem}}
-.strip .ava{width:74px;height:74px;border-radius:50%;overflow:hidden;background:var(--lav-100)}
-.strip .ava img{width:100%;height:100%;object-fit:cover;object-position:50% 12%}
-.strip p{font-size:.97rem;color:var(--ink-soft)}
-.strip p b{display:block;color:var(--grape-ink);font-size:1.04rem;margin-bottom:.15rem}
-.strip .who{display:block;font-size:.8rem;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.08em}
-.strip ul{list-style:none;margin-top:.35rem;display:grid;gap:.15rem;font-size:.95rem;color:var(--ink-2)}
-.strip ul li::before{content:"✓ ";color:var(--ok);font-weight:700}
-.ava-wrap{position:relative;align-self:start}
-.age{position:absolute;bottom:-6px;right:-10px;background:linear-gradient(135deg,var(--a1),var(--a2));color:var(--a-ink);font-weight:700;font-size:.78rem;padding:.2rem .55rem;border-radius:999px;white-space:nowrap}
-.plan .t{min-width:5.6rem}
-.free{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;margin-top:1.1rem}
-.free span{background:#fff;border:1px solid var(--lav-200);color:var(--grape-deep);font-weight:600;font-size:.94rem;padding:.42rem .9rem;border-radius:999px}
-.strip .rules{
-  font-size:.9rem;color:var(--no);font-weight:600;text-decoration:none;
-  border-bottom:1px solid rgba(163,68,82,.4);
-}
-@media(max-width:760px){.strip .rules{grid-column:1/-1;justify-self:start}}
-
-/* ---------- экран 3 · финал ---------- */
-.final{background:linear-gradient(168deg,var(--lav-100),var(--bg-soft) 62%,var(--bg))}
-.final .head{max-width:36rem;margin-inline:auto;text-align:center}
-.final .head .lead{margin-top:.8rem}
-.final .cta{max-width:620px;margin-inline:auto;margin-top:1.7rem}
-
-footer{padding-block:32px 44px;color:var(--ink-soft);font-size:.86rem;text-align:center;border-top:1px solid var(--lav-100)}
-footer a{color:var(--grape-deep)}
-
-/* ---------- появление при скролле ---------- */
-.reveal{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease}
-.reveal.on{opacity:1;transform:none}
-@media(prefers-reduced-motion:reduce){
-  .reveal{opacity:1;transform:none;transition:none}
-  .btn:hover{transform:none}
-  html{scroll-behavior:auto}
-}
+.btn-club{color:var(--a-ink);background:linear-gradient(180deg,var(--a1),var(--a2));box-shadow:0 14px 28px -14px rgba(242,178,62,.75)}
+.btn-note{margin-top:.6rem;font-size:.88rem;line-height:1.45;color:var(--ink-soft);display:flex;gap:.4rem;align-items:flex-start}
+.cta-foot{margin-top:1.05rem;padding-top:.95rem;border-top:1px solid var(--lav-100);font-size:.95rem;color:var(--ink-soft)}
+.closed{text-align:center}
+.closed .cta-sub{margin-bottom:1.3rem}
+[hidden]{display:none!important}
 </style>
-<!-- Посещаемость (без cookie, без IP): просмотр + клики по кнопкам -> club.facestudio.by/anketa/pv. Статистика: сверка базы/funnel_stats.py -->
+</head>
+<body>
+<main class="wrap" id="open">
+  <img class="photo" src="/klub4/assets/tatiana-hero.webp" alt="Татьяна Дембовская" width="1180" height="1288">
+  <span class="script">Приглашаю на эфир</span>
+  <h1>Молодость не на один день</h1>
+
+  <p class="lead">Четыре дня в клубе уже прошли. Но в эти выходные приглашаю вас на мой большой эфир — о том,
+  как сохранить результат и вернуть контроль над своим лицом:</p>
+
+  <div class="dates">
+    <p>💜 <b>суббота, 31 октября, 18:00</b> по Мск</p>
+    <p>💜 или <b>воскресенье, 1 ноября, 10:00</b> по Мск</p>
+  </div>
+
+  <ul class="list">
+    <li><span>✓</span><span>Начнём с теста: за минуту, своими руками, вы узнаете, в каком состоянии ваше лицо на самом деле</span></li>
+    <li><span>✓</span><span>Сделаем вместе 3 приёма — на брыли, нависшие веки и уголки рта</span></li>
+    <li><span>🎁</span><span>Тем, кто досмотрит до конца, подарю тренировку «Буккальный массаж»</span></li>
+  </ul>
+
+  <div class="cta">
+    <div class="cta-title">Вход на эфир — по личной ссылке</div>
+    <div class="cta-sub">Я пришлю её в Телеграм или ВКонтакте. Выберите, где вам удобнее:</div>
+    <div class="btns">
+      <a class="btn btn-tg" href="/klub4/tg/" data-cta="tg">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.04 15.47 8.7 20.2c.48 0 .69-.2.94-.45l2.26-2.16 4.68 3.43c.86.48 1.47.23 1.7-.79l3.08-14.43c.3-1.28-.46-1.78-1.3-1.47L1.68 9.63c-1.25.48-1.23 1.17-.21 1.48l4.72 1.47L17.1 6.03c.51-.34.98-.15.6.19z"/></svg>
+        В Телеграме
+      </a>
+      <a class="btn btn-vk" href="/klub4/vk/" data-cta="vk">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.16 17.72c-5.5 0-8.98-3.86-9.12-10.25h2.77c.1 4.7 2.24 6.7 3.87 7.1V7.47h2.63v3.94c1.55-.17 3.18-2.02 3.73-3.94h2.6a7.5 7.5 0 0 1-3.4 4.92 7.76 7.76 0 0 1 3.98 5.33h-2.87c-.5-1.62-1.98-2.88-4.04-3.08v3.08z"/></svg>
+        Во ВКонтакте
+      </a>
+    </div>
+    <p class="btn-note"><span>💬</span><span>Откроется чат — нажмите «Начать» (в Телеграме «Старт»), и я вас запишу.</span></p>
+    <div class="cta-foot">Если вы записывались на эфир 24 октября, ничего нажимать не нужно: ссылку пришлю сама в день эфира 🌸</div>
+  </div>
+</main>
+
+<!-- после END: тот же текст, что висит с 25.10 -->
+<main class="wrap closed" id="closed" hidden>
+  <div class="cta">
+    <div class="cta-title">Запись на тест-драйв закрыта</div>
+    <div class="cta-sub">Четыре дня прошли, тренировки больше не рассылаем. Но клуб работает:
+    живые занятия идут каждую неделю, и прийти можно в любой момент.</div>
+    <a class="btn btn-club" href="https://facestudio.by/" data-cta="club">Условия клуба</a>
+  </div>
+</main>
+
+<script>
+// Конец записи на повтор: вс 01.11 09:20 по Мск (06:20 UTC) — в 09:30 TG-5 последний раз читает список, 10 минут запаса
+(function(){var END=Date.UTC(2026,10,1,6,20);
+if(Date.now()>=END){document.getElementById('open').hidden=true;document.getElementById('closed').hidden=false;}})();
+</script>
+<!-- Посещаемость (без cookie, без IP): видно, сколько приходит и с какой меткой -->
 <script>
 (function(){var U='https://club.facestudio.by/anketa/pv',q=new URLSearchParams(location.search);
 function send(ev,t){try{var d=JSON.stringify({ev:ev,t:t||'',h:location.hostname,p:location.pathname,r:document.referrer,
@@ -304,159 +123,8 @@ if(!(navigator.sendBeacon&&navigator.sendBeacon(U,new Blob([d],{type:'text/plain
 fetch(U,{method:'POST',body:d,keepalive:true,mode:'no-cors'})}catch(e){}}
 send('view');
 document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('.btn,[data-cta]');if(!b)return;
-var all=[].slice.call(document.querySelectorAll('.btn,[data-cta]'));
-send('click',(b.getAttribute('data-cta')||b.getAttribute('data-link')||b.getAttribute('data-plat')||b.id||'btn')+'@'+(all.indexOf(b)+1))},true);
-})();
-</script>
-</head>
-<body>
-
-<header class="wrap topbar">
-  <div class="brand">Face Studio</div>
-  <span>4 дня в клубе · бесплатно</span>
-</header>
-
-<!-- ============ ЭКРАН 1 · оффер и запись ============ -->
-<section class="hero wrap">
-  <div class="hero-grid">
-    <div>
-      <div class="when">21–24 октября <i>·</i> 4 дня <i>·</i> бесплатно</div>
-      <h1><span class="script">Тест-драйв закрытого клуба — он уже прошёл</span>4 дня с Татьяной Дембовской, 21–24 октября</h1>
-      <p class="lead">Четыре дня бесплатных тренировок молодости из моего закрытого клуба. Без страха навредить себе, без путаницы из интернет-роликов — просто включаете видео, и мы молодеем вместе. <b>Эти дни прошли, но клуб работает дальше.</b></p>
-      <div class="zones">
-        <span>Шея</span><span>Осанка</span><span>Овал</span><span>Глаза</span>
-      </div>
-
-      <div class="cta">
-        <div class="cta-title">Запись на тест-драйв закрыта</div>
-        <div class="cta-sub">Четыре дня прошли, тренировки больше не рассылаем. Но клуб работает:
-        живые занятия идут каждую неделю, и прийти можно в любой момент.</div>
-        <div class="btns btns-one">
-          <a class="btn btn-club" href="https://facestudio.by/" data-cta="club">Условия клуба</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="shot-wrap">
-      <div class="shot">
-        <img src="assets/tatiana-hero.webp" alt="Татьяна Дембовская" width="1180" height="1288">
-      </div>
-      <div class="chip chip-1">Тренировка каждое утро</div>
-      <div class="chip chip-2">24 октября — большой эфир</div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ ЭКРАН 2 · что произойдёт за 4 дня (07.10) ============ -->
-<section>
-  <div class="wrap">
-    <h2>Что произойдёт с вами за эти 4 дня?</h2>
-    <div class="cards4">
-      <div class="card">
-        <h3>Уйдёт «каша в голове»</h3>
-        <p>Больше не нужно собирать обрывки техник по всему интернету. У вас будет чёткий план: шея, осанка, овал, глаза.
-        Ничего не нужно придумывать — просто включаете и повторяете за мной.</p>
-      </div>
-      <div class="card">
-        <h3>Уйдёт страх «а вдруг я сделаю хуже»</h3>
-        <p>Я объясняю каждое движение. Вы будете понимать, что делаете и зачем, и спокойно повторять за мной.</p>
-      </div>
-      <div class="card">
-        <h3>Вы докажете себе, что можете не бросать</h3>
-        <p>Многие боятся: «Опять начну и брошу». Но эти 4 дня построены так, что вы пройдёте их легко и с удовольствием.</p>
-      </div>
-      <div class="card">
-        <h3>Вы почувствуете результат своими руками</h3>
-        <p>Шея станет свободнее, а утром лицо будет меньше отекать. И вы сами скажете: «Ого, а это работает!
-        Что же будет через два месяца?»</p>
-      </div>
-    </div>
-    <div class="gift">
-      <div class="gift-shots">
-        <img class="inside" src="assets/pdf-inside.webp" alt="Страница из файла: что мешает получить результат" width="560" height="677" loading="lazy">
-        <img class="cover" src="assets/pdf-cover.webp" alt="От хаотичных упражнений к системе молодости" width="640" height="800" loading="lazy">
-      </div>
-      <div>
-        <span class="gift-tag">Подарок сразу после регистрации</span>
-        <h2>«От хаотичных упражнений к системе молодости»</h2>
-        <p>Как только запишетесь, пришлю вам этот разбор на 7 страниц.</p>
-        <ul>
-          <li><span>1</span><span>Четыре ошибки, из-за которых упражнения из интернета не дают результата</span></li>
-          <li><span>2</span><span>В каком порядке сочетать техники, чтобы они работали вместе, а не спорили друг с другом</span></li>
-          <li><span>3</span><span>Что меняется, когда занимаетесь системно: отёки, овал, взгляд</span></li>
-        </ul>
-        <p class="gift-foot">Прочитаете — и к 21 октября будете понимать, что мы делаем и зачем.</p>
-      </div>
-    </div>
-
-    <div class="cta">
-        <div class="cta-title">Запись на тест-драйв закрыта</div>
-        <div class="cta-sub">Четыре дня прошли, тренировки больше не рассылаем. Но клуб работает:
-        живые занятия идут каждую неделю, и прийти можно в любой момент.</div>
-        <div class="btns btns-one">
-          <a class="btn btn-club" href="https://facestudio.by/" data-cta="club">Условия клуба</a>
-        </div>
-      </div>
-  </div>
-</section>
-
-<!-- ============ ЭКРАН 3 · кто ведёт ============
-     Блок «Как пройдут эти 4 дня» (план по дням, «что вы получите», селфи) убран 03.10
-     по решению Анны — вернём позже, когда будут выбраны тренировки. ============ -->
-<section class="soft">
-  <div class="wrap">
-    <div class="strip" style="margin-top:0">
-      <div class="ava-wrap"><div class="ava"><img src="assets/tati-form.webp" alt="Татьяна Дембовская" width="720" height="815"></div><span class="age">57 лет</span></div>
-      <div><p><span class="who">Клуб ведёт</span><b>Татьяна Дембовская</b>Косметолог-эстетист, тренер по естественному омоложению:</p>
-        <ul>
-          <li>Провела более 1000 живых тренировок</li>
-          <li>С ней занимаются женщины из 20+ стран</li>
-          <li>700 тысяч подписчиков на YouTube</li>
-          <li>Прошла этот путь сама</li>
-        </ul>
-      </div>
-      <a class="rules" href="https://go.facestudio.online/rules/">Противопоказания →</a>
-    </div>
-  </div>
-</section>
-
-<!-- ============ ЭКРАН 3 · финал ============ -->
-<section class="final">
-  <div class="wrap">
-    <div class="head">
-      <h2><span class="script">21–24 октября</span>Позанимайтесь со мной 4 дня</h2>
-      <p class="lead">Каждое утро — новая тренировка из клуба. А 24 октября вечером
-      встретимся на большом прямом эфире и подведём итоги.</p>
-    </div>
-    <div class="cta">
-        <div class="cta-title">Запись на тест-драйв закрыта</div>
-        <div class="cta-sub">Четыре дня прошли, тренировки больше не рассылаем. Но клуб работает:
-        живые занятия идут каждую неделю, и прийти можно в любой момент.</div>
-        <div class="btns btns-one">
-          <a class="btn btn-club" href="https://facestudio.by/" data-cta="club">Условия клуба</a>
-        </div>
-      </div>
-  </div>
-</section>
-
-<footer class="wrap">
-  Face Studio · Татьяна Дембовская<br>
-  <a href="https://go.facestudio.online/rules/">Противопоказания к тренировкам</a>
-</footer>
-
-<script>
-(function(){
-  var els = document.querySelectorAll('.reveal');
-  if(!('IntersectionObserver' in window)){
-    els.forEach(function(e){e.classList.add('on')});
-    return;
-  }
-  var io = new IntersectionObserver(function(entries){
-    entries.forEach(function(en){
-      if(en.isIntersecting){ en.target.classList.add('on'); io.unobserve(en.target); }
-    });
-  },{rootMargin:'0px 0px -8% 0px',threshold:.12});
-  els.forEach(function(e){io.observe(e)});
+var all=[].slice.call(document.querySelectorAll('.btn,[data-cta]')).filter(function(x){return x.offsetParent});
+send('click',(b.getAttribute('data-cta')||'btn')+'@'+(all.indexOf(b)+1))},true);
 })();
 </script>
 </body>

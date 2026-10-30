@@ -3,8 +3,26 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Запись закрыта · Face Studio</title>
+<title>Повтор эфира · Face Studio</title>
 <meta name="robots" content="noindex">
+<!-- Повтор эфира 31.10/01.11 (30.10). До END — сразу в чат, после — «Запись закрыта».
+     Собрано: запуск-октябрь-2026/повтор-klub4/собрать-переходники.py. Откат: git checkout d6897b5 -- klub4/ -->
+<script>
+(function(){var U='https://club.facestudio.by/anketa/pv',q=new URLSearchParams(location.search);
+function send(ev,t){try{var d=JSON.stringify({ev:ev,t:t||'',h:location.hostname,p:location.pathname,r:document.referrer,
+us:q.get('utm_source')||q.get('u')||'',um:q.get('utm_medium')||'',uc:q.get('utm_campaign')||'',cid:q.get('cid')||'',
+src:q.get('p')||q.get('ct')||'',w:screen.width});
+if(!(navigator.sendBeacon&&navigator.sendBeacon(U,new Blob([d],{type:'text/plain'}))))
+fetch(U,{method:'POST',body:d,keepalive:true,mode:'no-cors'})}catch(e){}}
+send('view');
+document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('.btn,[data-cta]');if(!b)return;
+send('click',(b.getAttribute('data-cta')||'btn')+'@1')},true);
+// конец записи на повтор: вс 01.11 09:20 по Мск (06:20 UTC), чтение TG-5 в 09:30
+var END=Date.UTC(2026,10,1,6,20),u=(q.get('utm_source')||q.get('u')||'').replace(/[^\w-]/g,'').slice(0,40);
+window.OPEN=Date.now()<END;
+if(OPEN)location.replace('https://telegram.me/facestudio_club_bot?start=club4_tg');
+})();
+</script>
 <link rel="preload" href="/fonts/golos-text-cyr.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/fonts/fonts.css">
 <style>
@@ -23,27 +41,26 @@ a.btn{display:inline-flex;align-items:center;justify-content:center;min-height:5
       letter-spacing:.02em;text-transform:uppercase;font-size:.95rem;color:var(--a-ink);
       background:linear-gradient(180deg,var(--a1),var(--a2));
       box-shadow:0 14px 28px -12px rgba(242,178,62,.6)}
+[hidden]{display:none!important}
 </style>
 </head>
 <body>
-  <div class="card">
+  <div class="card" id="open">
+    <h1>Открываем Телеграм…</h1>
+    <p>Если ничего не произошло — нажмите кнопку.</p>
+    <a class="btn" id="go" href="/klub4/tg/" data-cta="open">Открыть в Телеграме</a>
+  </div>
+  <div class="card" id="closed" hidden>
     <h1>Запись на тест-драйв закрыта</h1>
     <p>Четыре дня прошли, тренировки больше не рассылаем. Но клуб работает: живые занятия
     идут каждую неделю, и прийти можно в любой момент.</p>
     <a class="btn" href="https://facestudio.by/" data-cta="club">Условия клуба</a>
   </div>
-<!-- Посещаемость (без cookie, без IP): видно, сколько ещё приходит по старым ссылкам -->
 <script>
-(function(){var U='https://club.facestudio.by/anketa/pv',q=new URLSearchParams(location.search);
-function send(ev,t){try{var d=JSON.stringify({ev:ev,t:t||'',h:location.hostname,p:location.pathname,r:document.referrer,
-us:q.get('utm_source')||q.get('u')||'',um:q.get('utm_medium')||'',uc:q.get('utm_campaign')||'',cid:q.get('cid')||'',
-src:q.get('p')||q.get('ct')||'',w:screen.width});
-if(!(navigator.sendBeacon&&navigator.sendBeacon(U,new Blob([d],{type:'text/plain'}))))
-fetch(U,{method:'POST',body:d,keepalive:true,mode:'no-cors'})}catch(e){}}
-send('view');
-document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('.btn,[data-cta]');if(!b)return;
-send('click',(b.getAttribute('data-cta')||'btn')+'@1')},true);
-})();
+(function(){var q=new URLSearchParams(location.search),
+u=(q.get('utm_source')||q.get('u')||'').replace(/[^\w-]/g,'').slice(0,40);
+if(window.OPEN){document.getElementById('go').href='https://telegram.me/facestudio_club_bot?start=club4_tg';}
+else{document.getElementById('open').hidden=true;document.getElementById('closed').hidden=false;}})();
 </script>
 </body>
 </html>
