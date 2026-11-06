@@ -290,7 +290,7 @@ footer .brand{display:block;margin-bottom:.4rem}
 
     <div class="deadline reveal"><span class="em">⏳</span><div>Эта тренировка будет доступна вам <b>72 часа</b> — потом запись закроется. <span id="countWrap" hidden>Осталось <span class="count" id="count">—</span>.</span> Позанимайтесь, пока она открыта.</div></div>
 
-    <div class="cta reveal">
+    <div class="cta reveal" id="openCta">
       <div class="btn-row" id="openSingle" hidden>
         <button type="button" class="btn" id="openBtn">Хочу заниматься так же 💙</button>
       </div>
@@ -307,8 +307,8 @@ footer .brand{display:block;margin-bottom:.4rem}
 <main id="viewClosed" class="wrap closed" hidden>
   <div class="em">🙈</div>
   <h1>Упс, доступ к тренировке уже закрыт</h1>
-  <p>Эта бесплатная тренировка была открыта 72 часа — и время вышло. Но вы можете заниматься по ней и по десяткам других — в моём Клубе.</p>
-  <div class="cta">
+  <p id="closedLead">Эта бесплатная тренировка была открыта 72 часа — и время вышло. Но вы можете заниматься по ней и по десяткам других — в моём Клубе.</p>
+  <div class="cta" id="closedCta">
     <div class="btn-row" id="closedSingle" hidden>
       <button type="button" class="btn" id="closedBtn">Хочу в Клуб 💙</button>
     </div>
@@ -327,15 +327,30 @@ footer .brand{display:block;margin-bottom:.4rem}
 <script>
 (function(){
   'use strict';
-  // пинг приёмника при открытии страницы (fire-and-forget, как POST на /rezultaty/)
-  try{
-    var cid = new URLSearchParams(location.search).get('cid') || '';
-    fetch('https://club.facestudio.by/anketa/page-open', {
-      method:'POST', mode:'cors', keepalive:true,
-      headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({ cid: cid, step: 'uprugaya' })
-    }).catch(function(){});
-  }catch(e){}
+  var params = new URLSearchParams(location.search);
+
+  // --- пришедшие за подарком из ролика 35: оффера для них нет ---
+  // Решение Анны 06.11: до ноябрьского эфира людям из ролика клуб не продаём, зовём
+  // их на эфир. Метку ставит ссылка из второго сообщения бота.
+  var NO_OFFER = params.get('src') === 'sustavnaya';
+
+  // Пинг приёмника при открытии страницы (fire-and-forget, как POST на /rezultaty/).
+  // Приёмник /page-open умеет ровно одно: запустить блок «Оффер» 64015907
+  // (app.py, FUNNEL_PAGE_BLOCKS['uprugaya']). Поэтому для src=sustavnaya мы просто
+  // не пингуем его — и оффер не уходит. Переменную funnel_uprugaya_sent в боте
+  // заводить не нужно: 07.11 Анна сказала, что поле переменных в Salebot неудобно,
+  // и мы убрали эту зависимость. Счётчик посещаемости — отдельный запрос в конце
+  // страницы, он работает для всех.
+  if(!NO_OFFER){
+    try{
+      var cid = params.get('cid') || '';
+      fetch('https://club.facestudio.by/anketa/page-open', {
+        method:'POST', mode:'cors', keepalive:true,
+        headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({ cid: cid, step: 'uprugaya' })
+      }).catch(function(){});
+    }catch(e){}
+  }
 
   // Кнопка просто открывает чат клиента — без меток и триггеров
   // (оффер уходит сам: page-open выше). Канал бот подставляет в ?ct= (1=TG, 0=VK).
@@ -345,13 +360,28 @@ footer .brand{display:block;margin-bottom:.4rem}
   };
   var ACCESS_HOURS = 72;
 
-  var params = new URLSearchParams(location.search);
   var ct = params.get('ct');   // '1' = Telegram, '0' = VK
   var p  = params.get('p');    // legacy-фолбэк 'tg' | 'vk'
   var plat = ct === '1' ? 'tg' : ct === '0' ? 'vk' : (p === 'tg' || p === 'vk' ? p : null);
 
+  // NO_OFFER объявлен выше, вместе с пингом приёмника: при src=sustavnaya оффер не
+  // уходит вовсе. Кнопки на этой странице оффера не знают — они просто открывают чат,
+  // и без оффера человек нажал бы «расскажу, как попасть в Клуб» и не получил бы
+  // ничего. Поэтому им же показываем текст про эфир без кнопок. Для всех остальных
+  // страница не меняется. Тексты — чат «Запуск РУ-клуба 8», тексты-бота.md, раздел
+  // «Оффер 64015907», пункт 4.
+
+  function showEfirInstead(ctaId, lines){
+    var cta = document.getElementById(ctaId);
+    if(!cta) return;
+    cta.innerHTML = lines.map(function(t, i){
+      return '<p class="cta-note">' + (i === 0 ? '<b>' + t + '</b>' : t) + '</p>';
+    }).join('');
+  }
+
   // wire: одна кнопка при известном канале, иначе две (фолбэк)
   function wireCta(singleId, bothId, singleBtnId){
+    if(NO_OFFER) return;   // кнопки не поднимаем вовсе
     var single = document.getElementById(singleId), both = document.getElementById(bothId);
     if(plat){
       single.hidden = false;
@@ -391,6 +421,13 @@ footer .brand{display:block;margin-bottom:.4rem}
   function showClosed(){
     viewOpen.hidden = true;
     viewClosed.hidden = false;
+    if(NO_OFFER){
+      var lead = document.getElementById('closedLead');
+      if(lead) lead.textContent = 'Эта тренировка была открыта 72 часа — и время вышло. '
+        + 'Скоро я провожу большой эфир и расскажу на нём, как заниматься со мной в клубе. '
+        + 'Приглашение пришлю вам в Телеграм или ВКонтакте 💙';
+      showEfirInstead('closedCta', []);
+    }
     wireCta('closedSingle', 'closedBoth', 'closedBtn');
   }
   function showOpen(){
@@ -399,6 +436,13 @@ footer .brand{display:block;margin-bottom:.4rem}
     // грузим плеер только когда открыто
     var pl = document.getElementById('player');
     if(pl && !pl.src) pl.src = pl.getAttribute('data-src');
+    if(NO_OFFER){
+      showEfirInstead('openCta', [
+        '💙 Хотите заниматься так же?',
+        'Скоро я провожу большой эфир и расскажу на нём, как заниматься со мной в клубе. '
+          + 'Приглашение пришлю вам в Телеграм или ВКонтакте — туда же, куда пришла эта тренировка.'
+      ]);
+    }
     wireCta('openSingle', 'openBoth', 'openBtn');
     startCountdown();
   }
