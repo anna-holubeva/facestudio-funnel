@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Открываем ВКонтакте · Face Studio</title>
+<meta name="robots" content="noindex,nofollow">
+<!-- Посещаемость (без cookie, без IP): просмотр + клики -> club.facestudio.by/anketa/pv. Статистика: сверка базы/funnel_stats.py.
+     Путь /oteki/vk/ = подарок зрительницам YouTube-ролика «41 Отёки» (тренировка «Верхняя часть лица»).
+     ВКонтакте параметр не пробрасывает вообще — воронку различаем только по пути. -->
+<script>
+(function(){var U='https://club.facestudio.by/anketa/pv',q=new URLSearchParams(location.search);
+function send(ev,t){try{var d=JSON.stringify({ev:ev,t:t||'',h:location.hostname,p:location.pathname,r:document.referrer,
+us:q.get('utm_source')||q.get('u')||'',um:q.get('utm_medium')||'',uc:q.get('utm_campaign')||'',cid:q.get('cid')||'',
+src:q.get('p')||q.get('ct')||'',w:screen.width});
+if(!(navigator.sendBeacon&&navigator.sendBeacon(U,new Blob([d],{type:'text/plain'}))))
+fetch(U,{method:'POST',body:d,keepalive:true,mode:'no-cors'})}catch(e){}}
+send('view');
+document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('.btn,[data-cta]');if(!b)return;
+send('click',(b.getAttribute('data-cta')||b.id||'btn'))},true);
+})();
+</script>
+<style>
+  :root{color-scheme:light}
+  body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;
+    background:linear-gradient(178deg,#f9fcfe 0%,#eaf5fb 100%);
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;
+    color:#22333f;padding:24px}
+  .box{text-align:center;max-width:360px}
+  h1{font-size:1.35rem;line-height:1.25;color:#1c2d38;margin:0 0 10px;font-weight:600}
+  p{font-size:1.02rem;line-height:1.5;color:#3d525f;margin:0 0 22px}
+  a.btn{display:inline-flex;align-items:center;justify-content:center;
+    min-height:54px;padding:0 30px;border-radius:999px;
+    background:linear-gradient(180deg,#5b8fd6,#3a6fc0);color:#fff;
+    font-weight:700;font-size:1.05rem;text-decoration:none;
+    box-shadow:0 8px 22px rgba(46,111,153,.22)}
+</style>
+</head>
+<body>
+<div class="box" id="box">
+  <h1>Открываем ВКонтакте…</h1>
+  <p>Если ничего не произошло — нажмите кнопку.</p>
+  <a class="btn" id="go" href="https://vk.com/im?sel=-202385574" data-cta="vk">Открыть во ВКонтакте</a>
+</div>
+<noscript>
+  <p style="text-align:center">
+    <a href="https://vk.com/im?sel=-202385574">Открыть ВКонтакте →</a>
+  </p>
+</noscript>
+<script>
+(function(){
+  'use strict';
+
+  // Ссылка автоподписки блока «Подарок 41 · верх лица» (метка verhlica, блок 2146993542),
+  // прислала Анна 13.11 скрином из Salebot: блок → «Ссылки на страницу» → «Ссылка на ВКонтакте с функцией автоподписки».
+  // ⚠️ Хэш привязан к блоку: пересоберут блок — брать ссылку заново.
+  //
+  // ВКонтакте не пробрасывает метку, поэтому start=verhlica здесь не работает:
+  // в ВК каждый подарок — это ОТДЕЛЬНАЯ ссылка автоподписки со своим хэшем.
+  // Хэш привязан к блоку и выдаётся Salebot, придумать или вывести его нельзя.
+  // Хэши других подарков сюда ставить НЕЛЬЗЯ — человек получит чужой подарок:
+  //   «Упругая шея» e9130697…, «Лимфодренажная гимнастика» (35) 1e7f6e6d….
+  var VK_URL = 'https://vk.ru/app7062840#881cb723e7634052d0412f258deca6d5&force=1';
+
+  // Пока ссылки нет — честно говорим об этом и отправляем в Телеграм, где метка уже работает,
+  // вместо того чтобы молча увести не туда. Блока на кодовое слово во ВКонтакте нет, поэтому
+  // «напишите слово …» здесь не предлагаем: никто бы не ответил.
+  if (!VK_URL) {
+    document.getElementById('box').innerHTML =
+      '<h1>Ссылка почти готова</h1>' +
+      '<p>Во ВКонтакте тренировка появится совсем скоро. А в Телеграме её можно забрать уже сейчас.</p>' +
+      '<a class="btn" href="../tg/" data-cta="vk-v-tg">Забрать в Телеграме</a>';
+    return;
+  }
+
+  document.getElementById('go').href = VK_URL;
+  location.replace(VK_URL);
+})();
+</script>
+</body>
+</html>
